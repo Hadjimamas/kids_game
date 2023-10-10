@@ -1,0 +1,68 @@
+[
+  {
+    "name": "Sheep",
+    "imagePath": "Sheep.JPG",
+    "soundPath": "sheep.mp3",
+    "category": "Farm"
+  },
+  {
+    "name": "Cow",
+    "imagePath": "Cow.JPG",
+    "soundPath": "cow.mp3",
+    "category": "Farm"
+  },
+  {
+    "name": "Rabbit",
+    "imagePath": "Rabbit.JPG",
+    "soundPath": "rabbit.mp3",
+    "category": "Farm"
+  },
+  {
+    "name": "Mouse",
+    "imagePath": "Mouse.JPG",
+    "soundPath": "mouse.mp3",
+    "category": "Farm"
+  },
+  {
+    "name": "Chicken",
+    "imagePath": "Chicken.JPG",
+    "soundPath": "chicken.mp3",
+    "category": "Farm"
+  },
+  {
+    "name": "Pig",
+    "imagePath": "Pig.JPG",
+    "soundPath": "pig.mp3",
+    "category": "Farm"
+  },
+  {
+    "name": "Snake",
+    "imagePath": "Snake.JPG",
+    "soundPath": "snake.mp3",
+    "category": "Jungle"
+  },
+  {
+    "name": "Tiger",
+    "imagePath": "Tiger.JPG",
+    "soundPath": "tiger.mp3",
+    "category": "Jungle"
+  },
+  {
+    "name": "Bear",
+    "imagePath": "Bear.png",
+    "soundPath": "bear.mp3",
+    "category": "Jungle"
+  },
+  {
+    "name": "Wolf",
+    "imagePath": "Wolf.JPG",
+    "soundPath": "wolf.mp3",
+    "category": "Forest"
+  },
+  {
+    "name": "Zebra",
+    "imagePath": "Zebra.JPG",
+    "soundPath": "zebra.mp3",
+    "category": "Tropical"
+  }
+]
