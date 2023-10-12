@@ -3,66 +3,77 @@
     "name": "Sheep",
     "imagePath": "Sheep.JPG",
     "soundPath": "sheep.mp3",
-    "category": "Farm"
+    "category": "Farm",
+    "question": "What animal is this?"
   },
   {
     "name": "Cow",
     "imagePath": "Cow.JPG",
     "soundPath": "cow.mp3",
-    "category": "Farm"
+    "category": "Farm",
+    "question": "What animal is this?"
   },
   {
     "name": "Rabbit",
     "imagePath": "Rabbit.JPG",
     "soundPath": "rabbit.mp3",
-    "category": "Farm"
+    "category": "Farm",
+    "question": "What animal is this?"
   },
   {
     "name": "Mouse",
     "imagePath": "Mouse.JPG",
     "soundPath": "mouse.mp3",
-    "category": "Farm"
+    "category": "Farm",
+    "question": "What animal is this?"
   },
   {
     "name": "Chicken",
     "imagePath": "Chicken.JPG",
     "soundPath": "chicken.mp3",
-    "category": "Farm"
+    "category": "Farm",
+    "question": "What animal is this?"
   },
   {
     "name": "Pig",
     "imagePath": "Pig.JPG",
     "soundPath": "pig.mp3",
-    "category": "Farm"
+    "category": "Farm",
+    "question": "What animal is this?"
   },
   {
     "name": "Snake",
     "imagePath": "Snake.JPG",
     "soundPath": "snake.mp3",
-    "category": "Jungle"
+    "category": "Jungle",
+    "question": "What animal is this?"
   },
   {
     "name": "Tiger",
     "imagePath": "Tiger.JPG",
     "soundPath": "tiger.mp3",
-    "category": "Jungle"
+    "category": "Jungle",
+    "question": "What animal is this?"
   },
   {
     "name": "Bear",
     "imagePath": "Bear.png",
     "soundPath": "bear.mp3",
-    "category": "Jungle"
+    "category": "Jungle",
+    "question": "What animal is this?"
   },
   {
     "name": "Wolf",
     "imagePath": "Wolf.JPG",
     "soundPath": "wolf.mp3",
-    "category": "Forest"
+    "category": "Forest",
+    "question": "What animal is this?"
   },
   {
     "name": "Zebra",
     "imagePath": "Zebra.JPG",
     "soundPath": "zebra.mp3",
-    "category": "Tropical"
+    "category": "Tropical",
+    "question": "What animal is this?"
   }
 ]
