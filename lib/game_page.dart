@@ -64,6 +64,8 @@ class AlphabetPuzzleState extends State<AlphabetPuzzle>
     setState(() {
       animalList.addAll(data);
     });
+
+    ///Clearing the Lists so I can insert the data from JSON
     listQuestions.clear();
     imageUrls.clear();
     answers.clear();
@@ -98,7 +100,7 @@ class AlphabetPuzzleState extends State<AlphabetPuzzle>
       showDialog(
         context: context,
         builder: (BuildContext context) {
-          return AlertDialog(
+          return AlertDialog.adaptive(
             title: const Text('Correct Answer!'),
             content: const Text('Congratulations! You got it right.'),
             actions: [
@@ -110,7 +112,7 @@ class AlphabetPuzzleState extends State<AlphabetPuzzle>
                     showDialog(
                       context: context,
                       builder: (BuildContext context) {
-                        return AlertDialog(
+                        return AlertDialog.adaptive(
                           title: const Text('Puzzle Completed'),
                           content:
                               const Text('You have completed all the puzzles.'),
@@ -150,7 +152,7 @@ class AlphabetPuzzleState extends State<AlphabetPuzzle>
       showDialog(
         context: context,
         builder: (BuildContext context) {
-          return const AlertDialog(
+          return const AlertDialog.adaptive(
             title: Text('Incorrect Answer!'),
             content: Text('Please try again.'),
           );
@@ -168,17 +170,17 @@ class AlphabetPuzzleState extends State<AlphabetPuzzle>
       body: Container(
         decoration: BoxDecoration(color: Colors.grey[400]),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(5.0),
               child: Card(
-                elevation: 4,
+                elevation: 5,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16.0),
+                  borderRadius: BorderRadius.circular(10.0),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(15.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
@@ -196,7 +198,7 @@ class AlphabetPuzzleState extends State<AlphabetPuzzle>
                           borderRadius: BorderRadius.circular(8),
                           child: Image.asset(
                             imageUrls[currentPuzzle],
-                            fit: BoxFit.fitHeight,
+                            width: double.infinity,
                           ),
                         ),
                       ),
@@ -209,8 +211,8 @@ class AlphabetPuzzleState extends State<AlphabetPuzzle>
                               return Row(
                                 children: [
                                   Container(
-                                    height: 50,
-                                    width: 50,
+                                    height: 40,
+                                    width: 40,
                                     alignment: Alignment.center,
                                     decoration: BoxDecoration(
                                       color: Colors.white,
@@ -262,8 +264,8 @@ class AlphabetPuzzleState extends State<AlphabetPuzzle>
                                       data: alphabet[index],
                                       feedback: Material(
                                         child: Container(
-                                          height: 50,
-                                          width: 50,
+                                          height: 55,
+                                          width: 55,
                                           decoration: BoxDecoration(
                                             color: Colors.white,
                                             borderRadius:
@@ -286,8 +288,9 @@ class AlphabetPuzzleState extends State<AlphabetPuzzle>
                                       ),
                                       childWhenDragging: Container(),
                                       child: Container(
-                                        height: 50,
-                                        width: 50,
+                                        height: 40,
+                                        width: 40,
+                                        alignment: Alignment.center,
                                         margin: const EdgeInsets.only(
                                             left: 5, right: 5),
                                         decoration: BoxDecoration(
@@ -299,14 +302,12 @@ class AlphabetPuzzleState extends State<AlphabetPuzzle>
                                             width: 2,
                                           ),
                                         ),
-                                        child: Center(
-                                          child: Text(
-                                            alphabet[index],
-                                            style: const TextStyle(
-                                                fontSize: 25,
-                                                color: Colors.red,
-                                                fontWeight: FontWeight.bold),
-                                          ),
+                                        child: Text(
+                                          alphabet[index],
+                                          style: const TextStyle(
+                                              fontSize: 25,
+                                              color: Colors.red,
+                                              fontWeight: FontWeight.bold),
                                         ),
                                       ),
                                     ),
