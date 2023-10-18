@@ -206,8 +206,8 @@ class AlphabetPuzzleState extends State<AlphabetPuzzle>
                       return Row(
                         children: [
                           Container(
-                            height: 50,
-                            width: 50,
+                            height: 45,
+                            width: 45,
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(8),
@@ -222,7 +222,7 @@ class AlphabetPuzzleState extends State<AlphabetPuzzle>
                                   : userAnswers[index],
                               textAlign: TextAlign.center,
                               style: const TextStyle(
-                                  fontSize: 35,
+                                  fontSize: 30,
                                   color: Colors.green,
                                   fontWeight: FontWeight.bold),
                             ),
