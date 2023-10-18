@@ -25,6 +25,7 @@ class AlphabetPuzzleState extends State<AlphabetPuzzle>
 
   /// List of Images
   List<String> imageUrls = ['assets/images/farm/Sheep.JPG'];
+  List<String> backgroundImages = ['assets/images/farm/background.jpg'];
 
   List<String> alphabet = [];
   List<String> userAnswers = [];
@@ -69,15 +70,20 @@ class AlphabetPuzzleState extends State<AlphabetPuzzle>
     listQuestions.clear();
     imageUrls.clear();
     answers.clear();
+    backgroundImages.clear();
     for (int i = 0; i < animalList.length; i++) {
       listQuestions.add(animalList[i]['question']);
       answers.add(animalList[i]['name']);
       imageUrls.add(
           'assets/images/${animalList[i]['category'].toString().toLowerCase()}/${animalList[i]['imagePath']}');
+      backgroundImages.add(
+          'assets/images/${animalList[i]['category'].toString().toLowerCase()}/background.jpg');
     }
+    print('Lists:');
     print(imageUrls);
     print(listQuestions);
     print(answers);
+    print(backgroundImages);
   }
 
   ///Generates Alphabets
@@ -85,9 +91,7 @@ class AlphabetPuzzleState extends State<AlphabetPuzzle>
     response = await rootBundle.loadString('assets/animals.json');
     data = json.decode(response);
     setState(() {
-      print('Animal List: $animalList');
       alphabet = animalList[currentPuzzle]['name'].split('');
-      print('Alphabet List: $alphabet');
       alphabet.shuffle();
       userAnswers = List.filled(animalList[currentPuzzle]['name'].length, '');
     });
@@ -163,182 +167,171 @@ class AlphabetPuzzleState extends State<AlphabetPuzzle>
 
   @override
   Widget build(BuildContext context) {
+    double deviceHeight = MediaQuery.of(context).size.height;
+    double deviceWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Alphabet Puzzle'),
-      ),
+      // appBar: AppBar(
+      //   centerTitle: true,
+      //   title: Text(
+      //     listQuestions[currentPuzzle],
+      //     style: const TextStyle(
+      //       fontSize: 25,
+      //       fontWeight: FontWeight.bold,
+      //     ),
+      //   ),
+      // ),
       body: Container(
-        decoration: BoxDecoration(color: Colors.grey[400]),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(5.0),
-              child: Card(
-                elevation: 5,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Text(
-                        listQuestions[currentPuzzle],
-                        style: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(height: 16),
-                      SizedBox(
-                        height: 200,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(8),
-                          child: Image.asset(
-                            imageUrls[currentPuzzle],
-                            width: double.infinity,
+        alignment: Alignment.center,
+        width: deviceWidth,
+        height: deviceHeight,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(backgroundImages[currentPuzzle]),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Image.asset(
+                imageUrls[currentPuzzle],
+                width: deviceWidth,
+                height: deviceHeight / 3,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: List.generate(userAnswers.length, (index) {
+                  return DragTarget<String>(
+                    builder: (context, candidateData, rejectedData) {
+                      return Row(
+                        children: [
+                          Container(
+                            height: 50,
+                            width: 50,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(
+                                color: Colors.green,
+                                width: 2,
+                              ),
+                            ),
+                            child: Text(
+                              userAnswers[index].isEmpty
+                                  ? ' '
+                                  : userAnswers[index],
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                  fontSize: 35,
+                                  color: Colors.green,
+                                  fontWeight: FontWeight.bold),
+                            ),
                           ),
-                        ),
-                      ),
-                      const SizedBox(height: 60),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: List.generate(userAnswers.length, (index) {
-                          return DragTarget<String>(
-                            builder: (context, candidateData, rejectedData) {
-                              return Row(
-                                children: [
-                                  Container(
-                                    height: 40,
-                                    width: 40,
-                                    alignment: Alignment.center,
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(8),
-                                      border: Border.all(
-                                        color: Colors.green,
-                                        width: 2,
-                                      ),
+                          const SizedBox(width: 10),
+                        ],
+                      );
+                    },
+                    onAccept: (data) {
+                      setState(() {
+                        userAnswers[index] = data;
+                      });
+                    },
+                  );
+                }),
+              ),
+              const SizedBox(height: 15),
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
+                height: 60,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ListView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: alphabet.length,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) {
+                        return Row(
+                          children: [
+                            Draggable<String>(
+                              data: alphabet[index],
+                              feedback: Material(
+                                child: Container(
+                                  height: 55,
+                                  width: 55,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(8),
+                                    border: Border.all(
+                                      color: Colors.orange,
+                                      width: 2,
                                     ),
+                                  ),
+                                  child: Center(
                                     child: Text(
-                                      userAnswers[index].isEmpty
-                                          ? ' '
-                                          : userAnswers[index],
+                                      alphabet[index],
                                       style: const TextStyle(
                                           fontSize: 25,
-                                          color: Colors.green,
+                                          color: Colors.orange,
                                           fontWeight: FontWeight.bold),
                                     ),
                                   ),
-                                  const SizedBox(width: 10),
-                                ],
-                              );
-                            },
-                            onAccept: (data) {
-                              setState(() {
-                                userAnswers[index] = data;
-                              });
-                            },
-                          );
-                        }),
-                      ),
-                      const SizedBox(height: 16),
-                      SizedBox(
-                        width: 500,
-                        height: 60,
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            ListView.builder(
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              itemCount: alphabet.length,
-                              scrollDirection: Axis.horizontal,
-                              itemBuilder: (context, index) {
-                                return Row(
-                                  children: [
-                                    Draggable<String>(
-                                      data: alphabet[index],
-                                      feedback: Material(
-                                        child: Container(
-                                          height: 55,
-                                          width: 55,
-                                          decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                            border: Border.all(
-                                              color: Colors.orange,
-                                              width: 2,
-                                            ),
-                                          ),
-                                          child: Center(
-                                            child: Text(
-                                              alphabet[index],
-                                              style: const TextStyle(
-                                                  fontSize: 25,
-                                                  color: Colors.orange,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      childWhenDragging: Container(),
-                                      child: Container(
-                                        height: 40,
-                                        width: 40,
-                                        alignment: Alignment.center,
-                                        margin: const EdgeInsets.only(
-                                            left: 5, right: 5),
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                          border: Border.all(
-                                            color: Colors.red,
-                                            width: 2,
-                                          ),
-                                        ),
-                                        child: Text(
-                                          alphabet[index],
-                                          style: const TextStyle(
-                                              fontSize: 25,
-                                              color: Colors.red,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                    ),
-                                    // const SizedBox(width: 10,),
-                                  ],
-                                );
-                              },
+                                ),
+                              ),
+                              childWhenDragging: Container(),
+                              child: Container(
+                                height: 40,
+                                width: 40,
+                                alignment: Alignment.center,
+                                margin:
+                                    const EdgeInsets.only(left: 5, right: 5),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(8),
+                                  border: Border.all(
+                                    color: Colors.red,
+                                    width: 2,
+                                  ),
+                                ),
+                                child: Text(
+                                  alphabet[index],
+                                  style: const TextStyle(
+                                      fontSize: 25,
+                                      color: Colors.red,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
                             ),
                           ],
-                        ),
-                      ),
-                      const SizedBox(height: 30),
-                      ElevatedButton(
-                        onPressed: checkAnswer,
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          padding: const EdgeInsets.symmetric(vertical: 12),
-                        ),
-                        child: const Text(
-                          'Check Answer',
-                          style: TextStyle(fontSize: 18),
-                        ),
-                      ),
-                    ],
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 30),
+              Container(
+                width: deviceWidth / 1.5,
+                height: 60,
+                padding: const EdgeInsets.only(bottom: 15.0),
+                child: ElevatedButton(
+                  onPressed: checkAnswer,
+                  style: ElevatedButton.styleFrom(
+                    side: const BorderSide(color: Colors.orange, width: 2),
+                    //backgroundColor: Colors.greenAccent,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
+                  child: const Text(
+                    'Check Answer',
+                    style: TextStyle(fontSize: 18),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

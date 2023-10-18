@@ -1,7 +1,14 @@
 [
   {
+    "name": "Cat",
+    "imagePath": "Cat.png",
+    "soundPath": "Cat.mp3",
+    "category": "Farm",
+    "question": "What animal is this?"
+  },
+  {
     "name": "Sheep",
-    "imagePath": "Sheep.JPG",
+    "imagePath": "SheepNew.png",
     "soundPath": "sheep.mp3",
     "category": "Farm",
     "question": "What animal is this?"
