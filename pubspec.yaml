@@ -27,4 +27,17 @@ flutter:
     - assets/images/forest/
     - assets/images/jungle/
     - assets/images/tropical/
+  fonts:
+    - family: Jungle Hope
+      fonts:
+        - asset: assets/fonts/Jungle Hope.ttf
+    - family: Lovely Kids
+      fonts:
+        - asset: assets/fonts/Lovely Kids.ttf
+    - family: Mansalva
+      fonts:
+        - asset: assets/fonts/Mansalva.ttf
+    - family: Mynerve
+      fonts:
+        - asset: assets/fonts/Mynerve.ttf
   uses-material-design: true

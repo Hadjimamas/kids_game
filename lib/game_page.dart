@@ -79,7 +79,7 @@ class AlphabetPuzzleState extends State<AlphabetPuzzle>
       backgroundImages.add(
           'assets/images/${animalList[i]['category'].toString().toLowerCase()}/background.jpg');
     }
-    print('Lists:');
+    print('**********Lists**********');
     print(imageUrls);
     print(listQuestions);
     print(answers);
@@ -99,7 +99,6 @@ class AlphabetPuzzleState extends State<AlphabetPuzzle>
 
   ///Checks Answer
   void checkAnswer() {
-    print("$currentPuzzle/${animalList.length}");
     if (userAnswers.join('') == answers[currentPuzzle]) {
       showDialog(
         context: context,
@@ -139,6 +138,8 @@ class AlphabetPuzzleState extends State<AlphabetPuzzle>
                     // Next puzzle
                     setState(() {
                       currentPuzzle++;
+                      print(
+                          "Correct Answers: $currentPuzzle/${animalList.length}");
                       generateAlphabetOptions();
                     });
                   }
@@ -170,18 +171,9 @@ class AlphabetPuzzleState extends State<AlphabetPuzzle>
     double deviceHeight = MediaQuery.of(context).size.height;
     double deviceWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-      // appBar: AppBar(
-      //   centerTitle: true,
-      //   title: Text(
-      //     listQuestions[currentPuzzle],
-      //     style: const TextStyle(
-      //       fontSize: 25,
-      //       fontWeight: FontWeight.bold,
-      //     ),
-      //   ),
-      // ),
       body: Container(
-        alignment: Alignment.center,
+        padding: const EdgeInsets.only(top: 40),
+        alignment: Alignment.topCenter,
         width: deviceWidth,
         height: deviceHeight,
         decoration: BoxDecoration(
@@ -193,6 +185,16 @@ class AlphabetPuzzleState extends State<AlphabetPuzzle>
         child: SingleChildScrollView(
           child: Column(
             children: [
+              Text(
+                //'Τι ζωώ είναι αυτό',
+                listQuestions[currentPuzzle],
+                style: TextStyle(
+                  color: Colors.deepPurple,
+                  fontSize: deviceWidth / 9,
+                  fontFamily: 'Lovely Kids',
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
               Image.asset(
                 imageUrls[currentPuzzle],
                 width: deviceWidth,
@@ -241,7 +243,7 @@ class AlphabetPuzzleState extends State<AlphabetPuzzle>
               ),
               const SizedBox(height: 15),
               SizedBox(
-                width: MediaQuery.of(context).size.width,
+                width: deviceWidth,
                 height: 60,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -257,6 +259,7 @@ class AlphabetPuzzleState extends State<AlphabetPuzzle>
                             Draggable<String>(
                               data: alphabet[index],
                               feedback: Material(
+                                borderRadius: BorderRadius.circular(8),
                                 child: Container(
                                   height: 55,
                                   width: 55,
