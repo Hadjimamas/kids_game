@@ -8,77 +8,77 @@
   },
   {
     "name": "Sheep",
-    "imagePath": "SheepNew.png",
+    "imagePath": "Sheep.PNG",
     "soundPath": "sheep.mp3",
     "category": "Farm",
     "question": "What animal is this?"
   },
   {
     "name": "Cow",
-    "imagePath": "Cow.JPG",
+    "imagePath": "Cow.PNG",
     "soundPath": "cow.mp3",
     "category": "Farm",
     "question": "What animal is this?"
   },
   {
     "name": "Rabbit",
-    "imagePath": "Rabbit.JPG",
+    "imagePath": "Rabbit.PNG",
     "soundPath": "rabbit.mp3",
     "category": "Farm",
     "question": "What animal is this?"
   },
   {
     "name": "Mouse",
-    "imagePath": "Mouse.JPG",
+    "imagePath": "Mouse.PNG",
     "soundPath": "mouse.mp3",
     "category": "Farm",
     "question": "What animal is this?"
   },
   {
     "name": "Chicken",
-    "imagePath": "Chicken.JPG",
+    "imagePath": "Chicken.PNG",
     "soundPath": "chicken.mp3",
     "category": "Farm",
     "question": "What animal is this?"
   },
   {
     "name": "Pig",
-    "imagePath": "Pig.JPG",
+    "imagePath": "Pig.PNG",
     "soundPath": "pig.mp3",
     "category": "Farm",
     "question": "What animal is this?"
   },
   {
     "name": "Snake",
-    "imagePath": "Snake.JPG",
+    "imagePath": "Snake.png",
     "soundPath": "snake.mp3",
-    "category": "Jungle",
+    "category": "Tropical",
     "question": "What animal is this?"
   },
   {
     "name": "Tiger",
-    "imagePath": "Tiger.JPG",
+    "imagePath": "Tiger.PNG",
     "soundPath": "tiger.mp3",
-    "category": "Jungle",
+    "category": "Tropical",
     "question": "What animal is this?"
   },
   {
     "name": "Bear",
-    "imagePath": "Bear.png",
+    "imagePath": "Bear.PNG",
     "soundPath": "bear.mp3",
-    "category": "Jungle",
+    "category": "Tropical",
     "question": "What animal is this?"
   },
   {
     "name": "Wolf",
-    "imagePath": "Wolf.JPG",
+    "imagePath": "Wolf.PNG",
     "soundPath": "wolf.mp3",
     "category": "Forest",
     "question": "What animal is this?"
   },
   {
     "name": "Zebra",
-    "imagePath": "Zebra.JPG",
+    "imagePath": "Zebra.PNG",
     "soundPath": "zebra.mp3",
     "category": "Tropical",
     "question": "What animal is this?"

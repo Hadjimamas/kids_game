@@ -24,7 +24,7 @@ class AlphabetPuzzleState extends State<AlphabetPuzzle>
   List<String> answers = [''];
 
   /// List of Images
-  List<String> imageUrls = ['assets/images/farm/Sheep.JPG'];
+  List<String> imageUrls = ['assets/images/farm/SheepNew.png'];
   List<String> backgroundImages = ['assets/images/farm/background.jpg'];
 
   List<String> alphabet = [];
