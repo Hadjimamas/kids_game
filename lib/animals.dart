@@ -39,7 +39,7 @@ class AnimalsPageState extends State<AnimalsPage> {
     double deviceWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Container(
-        padding: const EdgeInsets.only(top: 40),
+        padding: const EdgeInsets.only(top: 40, bottom: 20),
         alignment: Alignment.topCenter,
         width: deviceWidth,
         height: deviceHeight,
@@ -50,12 +50,12 @@ class AnimalsPageState extends State<AnimalsPage> {
           ),
         ),
         child: GridView.builder(
-          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-            crossAxisSpacing: 10,
-            mainAxisSpacing: 10,
-            maxCrossAxisExtent: 100,
-            //childAspectRatio: 2 / 2,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2, // Number of items in each row
+            mainAxisSpacing: 50.0, // Spacing between rows
+            crossAxisSpacing: 50.0, // Spacing between columns
           ),
+          padding: const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 10.0),
           itemCount: animalList.length,
           itemBuilder: (context, index) {
             String animalName = animalList[index]['name'];
@@ -67,29 +67,43 @@ class AnimalsPageState extends State<AnimalsPage> {
             String defaultSoundPath =
                 'assets/audio/${animalCategory.toLowerCase()}/';
             animalList.sort((a, b) => a['category'].compareTo(b['category']));
-            return Stack(
-              alignment: AlignmentDirectional.bottomEnd,
+            return Column(
               children: [
-                Image.asset(
-                  '$defaultImagePath$animalImage',
-                  width: deviceWidth / 2,
-                  height: deviceHeight / 10,
-                  errorBuilder: (BuildContext context, Object exception,
-                      StackTrace? stackTrace) {
-                    return Image.asset('assets/images/farm/Sheep.PNG');
-                  },
+                Text(
+                  animalName,
+                  style: TextStyle(
+                    fontSize: deviceWidth / 15,
+                    color: Colors.pinkAccent,
+                    fontFamily: 'Jungle Hope',
+                  ),
                 ),
-                FloatingActionButton.small(
-                  child: const Icon(Icons.volume_up),
-                  onPressed: () {
-                    print('Animal Playing: $animalName');
-                    audioPlayer.open(
-                      Audio("$defaultSoundPath$animalSound"),
-                      autoStart: true,
-                      showNotification: true,
-                    );
-                  },
-                )
+                Expanded(
+                  child: Stack(
+                    alignment: AlignmentDirectional.bottomEnd,
+                    children: [
+                      Image.asset(
+                        '$defaultImagePath$animalImage',
+                        width: deviceWidth / 2,
+                        height: deviceHeight,
+                        errorBuilder: (BuildContext context, Object exception,
+                            StackTrace? stackTrace) {
+                          return Image.asset('assets/images/farm/Sheep.PNG');
+                        },
+                      ),
+                      FloatingActionButton.small(
+                        child: const Icon(Icons.volume_up),
+                        onPressed: () {
+                          print('Animal Playing: $animalName');
+                          audioPlayer.open(
+                            Audio("$defaultSoundPath$animalSound"),
+                            autoStart: true,
+                            showNotification: true,
+                          );
+                        },
+                      )
+                    ],
+                  ),
+                ),
               ],
             );
           },
