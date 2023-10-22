@@ -64,6 +64,7 @@ class AlphabetPuzzleState extends State<AlphabetPuzzle>
     data = json.decode(response);
     setState(() {
       animalList.addAll(data);
+      animalList.sort((a, b) => a['category'].compareTo(b['category']));
     });
 
     ///Clearing the Lists so I can insert the data from JSON
