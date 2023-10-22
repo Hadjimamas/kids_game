@@ -20,12 +20,10 @@ flutter:
     - assets/audio/
     - assets/audio/farm/
     - assets/audio/forest/
-    - assets/audio/jungle/
     - assets/audio/tropical/
     - assets/images/
     - assets/images/farm/
     - assets/images/forest/
-    - assets/images/jungle/
     - assets/images/tropical/
   fonts:
     - family: Jungle Hope

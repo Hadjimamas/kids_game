@@ -7,6 +7,41 @@
     "question": "What animal is this?"
   },
   {
+    "name": "Dog",
+    "imagePath": "Dog.PNG",
+    "soundPath": "dog.mp3",
+    "category": "Farm",
+    "question": "What animal is this?"
+  },
+  {
+    "name": "Donkey",
+    "imagePath": "Donkey.PNG",
+    "soundPath": "donkey.mp3",
+    "category": "Farm",
+    "question": "What animal is this?"
+  },
+  {
+    "name": "Duck",
+    "imagePath": "Duck.PNG",
+    "soundPath": "duck.mp3",
+    "category": "Farm",
+    "question": "What animal is this?"
+  },
+  {
+    "name": "Goat",
+    "imagePath": "Goat.PNG",
+    "soundPath": "goat.mp3",
+    "category": "Farm",
+    "question": "What animal is this?"
+  },
+  {
+    "name": "Horse",
+    "imagePath": "Horse.PNG",
+    "soundPath": "horse.mp3",
+    "category": "Farm",
+    "question": "What animal is this?"
+  },
+  {
     "name": "Sheep",
     "imagePath": "Sheep.PNG",
     "soundPath": "sheep.mp3",
@@ -49,6 +84,13 @@
     "question": "What animal is this?"
   },
   {
+    "name": "Squirrel",
+    "imagePath": "Squirrel.PNG",
+    "soundPath": "squirrel.mp3",
+    "category": "Farm",
+    "question": "What animal is this?"
+  },
+  {
     "name": "Snake",
     "imagePath": "Snake.png",
     "soundPath": "snake.mp3",
@@ -66,6 +108,34 @@
     "name": "Bear",
     "imagePath": "Bear.PNG",
     "soundPath": "bear.mp3",
+    "category": "Tropical",
+    "question": "What animal is this?"
+  },
+  {
+    "name": "Camel",
+    "imagePath": "Camel.PNG",
+    "soundPath": "camel.mp3",
+    "category": "Tropical",
+    "question": "What animal is this?"
+  },
+  {
+    "name": "Elephant",
+    "imagePath": "Elephant.PNG",
+    "soundPath": "elephant.mp3",
+    "category": "Tropical",
+    "question": "What animal is this?"
+  },
+  {
+    "name": "Giraffe",
+    "imagePath": "Giraffe.PNG",
+    "soundPath": "giraffe.mp3",
+    "category": "Tropical",
+    "question": "What animal is this?"
+  },
+  {
+    "name": "Lion",
+    "imagePath": "Lion.PNG",
+    "soundPath": "lion.mp3",
     "category": "Tropical",
     "question": "What animal is this?"
   },

@@ -24,7 +24,7 @@ class AlphabetPuzzleState extends State<AlphabetPuzzle>
   List<String> answers = [''];
 
   /// List of Images
-  List<String> imageUrls = ['assets/images/farm/SheepNew.png'];
+  List<String> imageUrls = ['assets/images/farm/Sheep.PNG'];
   List<String> backgroundImages = ['assets/images/farm/background.jpg'];
 
   List<String> alphabet = [];
@@ -186,7 +186,6 @@ class AlphabetPuzzleState extends State<AlphabetPuzzle>
           child: Column(
             children: [
               Text(
-                //'Τι ζωώ είναι αυτό',
                 listQuestions[currentPuzzle],
                 style: TextStyle(
                   color: Colors.deepPurple,
@@ -200,6 +199,7 @@ class AlphabetPuzzleState extends State<AlphabetPuzzle>
                 width: deviceWidth,
                 height: deviceHeight / 3,
               ),
+              const SizedBox(height: 10),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: List.generate(userAnswers.length, (index) {
