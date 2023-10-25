@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:kids_game/imagePuzzle/Core/app_string.dart';
+import 'package:kids_game/imagePuzzle/Presentation/Home%20Page/home_page.dart';
+import 'package:kids_game/imagePuzzle/Services/hive_db.dart';
+import 'package:kids_game/imagePuzzle/Theme/app_theme.dart';
 
-import 'animals.dart';
-
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+  Hive.registerAdapter<ImageStore>(ImageStoreAdapter());
+  await Hive.openBox<ImageStore>(AppString.dbName);
   runApp(const MyApp());
 }
 
@@ -14,8 +21,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      theme: ThemeData(useMaterial3: true),
-      home: const AnimalsPage(),
+      theme: ThemeData(
+          useMaterial3: true,
+          primarySwatch: Colors.teal,
+          textTheme: Themes.textTheme),
+      home: const HomePage(),
     );
   }
 }
+
+void pageNavigation(context, Widget newPage) => Navigator.of(context)
+    .push(MaterialPageRoute(builder: (context) => newPage));
