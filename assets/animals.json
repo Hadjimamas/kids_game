@@ -108,7 +108,7 @@
     "name": "Bear",
     "imagePath": "Bear.PNG",
     "soundPath": "bear.mp3",
-    "category": "Tropical",
+    "category": "Forest",
     "question": "What animal is this?"
   },
   {

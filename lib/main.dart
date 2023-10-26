@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:kids_game/animals.dart';
 import 'package:kids_game/imagePuzzle/Core/app_string.dart';
-import 'package:kids_game/imagePuzzle/Presentation/Home%20Page/home_page.dart';
+import 'package:kids_game/imagePuzzle/Presentation/Home%20Page/image_puzzle_page.dart';
 import 'package:kids_game/imagePuzzle/Services/hive_db.dart';
 import 'package:kids_game/imagePuzzle/Theme/app_theme.dart';
 
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
           primarySwatch: Colors.teal,
           textTheme: Themes.textTheme),
-      home: const HomePage(),
+      home: const AnimalsPage(),
     );
   }
 }

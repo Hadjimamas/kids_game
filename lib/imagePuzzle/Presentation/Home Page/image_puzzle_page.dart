@@ -7,14 +7,14 @@ import 'package:kids_game/imagePuzzle/Presentation/Home%20Page/Widgets/my_puzzle
 import 'package:kids_game/imagePuzzle/Presentation/Home%20Page/Widgets/title_image_section.dart';
 import 'package:kids_game/imagePuzzle/Theme/app_theme.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class ImagePuzzle extends StatefulWidget {
+  const ImagePuzzle({Key? key}) : super(key: key);
 
   @override
-  HomePageState createState() => HomePageState();
+  ImagePuzzleState createState() => ImagePuzzleState();
 }
 
-class HomePageState extends State<HomePage> {
+class ImagePuzzleState extends State<ImagePuzzle> {
   @override
   void initState() {
     AppAssets.initImages(AppAssets.heroImageAssets, AppAssets.heroImageList);
