@@ -2,7 +2,7 @@
   {
     "name": "Cat",
     "imagePath": "Cat.png",
-    "soundPath": "Cat.mp3",
+    "soundPath": "cat.mp3",
     "category": "Farm",
     "question": "What animal is this?"
   },

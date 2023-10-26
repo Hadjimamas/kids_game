@@ -6,7 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:kids_game/imagePuzzle/Core/app_colors.dart';
 import 'package:kids_game/imagePuzzle/Core/app_string.dart';
 import 'package:kids_game/imagePuzzle/Model/utility.dart';
-import 'package:kids_game/imagePuzzle/Presentation/Flutter%20%20Pluzzle/puzzle_page.dart';
+import 'package:kids_game/imagePuzzle/Presentation/FlutterPluzzle/puzzle_page.dart';
 import 'package:kids_game/imagePuzzle/Services/hive_db.dart';
 import 'package:permission_handler/permission_handler.dart';
 

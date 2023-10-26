@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:kids_game/imagePuzzle/Presentation/Flutter%20%20Pluzzle/puzzle_page.dart';
-import 'package:kids_game/imagePuzzle/Presentation/Home%20Page/Widgets/custome_text.dart';
+import 'package:kids_game/imagePuzzle/Presentation/FlutterPluzzle/puzzle_page.dart';
 
 import '../../../../main.dart';
+import 'custome_text.dart';
 
 class AssetImageSection extends StatelessWidget {
   const AssetImageSection({

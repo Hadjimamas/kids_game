@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:kids_game/imagePuzzle/Core/app_colors.dart';
 import 'package:kids_game/imagePuzzle/Core/assets.dart';
-import 'package:kids_game/imagePuzzle/Presentation/Home%20Page/Widgets/bootom_modal_sheet.dart';
-import 'package:kids_game/imagePuzzle/Presentation/Home%20Page/Widgets/custome_text.dart';
-import 'package:kids_game/imagePuzzle/Presentation/Home%20Page/Widgets/my_puzzle_section.dart';
-import 'package:kids_game/imagePuzzle/Presentation/Home%20Page/Widgets/title_image_section.dart';
 import 'package:kids_game/imagePuzzle/Theme/app_theme.dart';
+
+import 'Widgets/bootom_modal_sheet.dart';
+import 'Widgets/custome_text.dart';
+import 'Widgets/my_puzzle_section.dart';
+import 'Widgets/title_image_section.dart';
 
 class ImagePuzzle extends StatefulWidget {
   const ImagePuzzle({Key? key}) : super(key: key);

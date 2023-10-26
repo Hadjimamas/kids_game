@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:kids_game/animals.dart';
 import 'package:kids_game/imagePuzzle/Core/app_string.dart';
-import 'package:kids_game/imagePuzzle/Presentation/Home%20Page/image_puzzle_page.dart';
 import 'package:kids_game/imagePuzzle/Services/hive_db.dart';
 import 'package:kids_game/imagePuzzle/Theme/app_theme.dart';
 

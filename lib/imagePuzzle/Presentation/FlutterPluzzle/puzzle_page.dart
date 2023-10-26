@@ -10,7 +10,7 @@ import 'package:image/image.dart' as image;
 import 'package:kids_game/imagePuzzle/Core/app_colors.dart';
 import 'package:kids_game/imagePuzzle/Core/app_string.dart';
 import 'package:kids_game/imagePuzzle/Model/object_model.dart';
-import 'package:kids_game/imagePuzzle/Presentation/Flutter%20%20Pluzzle/Widgets/button.dart';
+import 'package:kids_game/imagePuzzle/Presentation/FlutterPluzzle/Widgets/button.dart';
 
 class PuzzlePage extends StatefulWidget {
   const PuzzlePage({Key? key, required this.imageWidget, required this.heroTag})
