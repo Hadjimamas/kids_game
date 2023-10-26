@@ -147,9 +147,37 @@
     "question": "What animal is this?"
   },
   {
+    "name": "Owl",
+    "imagePath": "Owl.png",
+    "soundPath": "owl.mp3",
+    "category": "Forest",
+    "question": "What animal is this?"
+  },
+  {
+    "name": "Deer",
+    "imagePath": "Deer.png",
+    "soundPath": "deer.mp3",
+    "category": "Forest",
+    "question": "What animal is this?"
+  },
+  {
+    "name": "Fox",
+    "imagePath": "Fox.png",
+    "soundPath": "fox.mp3",
+    "category": "Forest",
+    "question": "What animal is this?"
+  },
+  {
     "name": "Zebra",
     "imagePath": "Zebra.PNG",
     "soundPath": "zebra.mp3",
+    "category": "Tropical",
+    "question": "What animal is this?"
+  },
+  {
+    "name": "Parrot",
+    "imagePath": "Parrot.png",
+    "soundPath": "parrot.mp3",
     "category": "Tropical",
     "question": "What animal is this?"
   }

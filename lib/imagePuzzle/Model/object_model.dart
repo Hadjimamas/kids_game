@@ -8,13 +8,14 @@ class ObjectsModel {
   Size size;
   Image image;
   bool empty;
+
   ObjectsModel({
     required this.defaultPosition,
     required this.currentPosition,
     required this.defaultIndex,
     required this.currentIndex,
     required this.size,
-     required this.image,
+    required this.image,
     this.empty = false,
   });
 }
