@@ -55,7 +55,7 @@ class AnimalsPageState extends State<AnimalsPage> {
             mainAxisSpacing: 50.0, // Spacing between rows
             crossAxisSpacing: 50.0, // Spacing between columns
           ),
-          padding: const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 10.0),
+          padding: const EdgeInsets.all(10),
           itemCount: animalList.length,
           itemBuilder: (context, index) {
             String animalName = animalList[index]['name'];
@@ -100,7 +100,7 @@ class AnimalsPageState extends State<AnimalsPage> {
                             showNotification: true,
                           );
                         },
-                      )
+                      ),
                     ],
                   ),
                 ),

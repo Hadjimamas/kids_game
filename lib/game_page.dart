@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -32,6 +33,7 @@ class AlphabetPuzzleState extends State<AlphabetPuzzle>
   late AnimationController _animationController;
   late Animation<double> _animation;
   int currentPuzzle = 0;
+  int correctAnswers = 0;
   String response = '';
   List<dynamic> data = [];
 
@@ -139,8 +141,9 @@ class AlphabetPuzzleState extends State<AlphabetPuzzle>
                     // Next puzzle
                     setState(() {
                       currentPuzzle++;
+                      correctAnswers++;
                       print(
-                          "Correct Answers: $currentPuzzle/${animalList.length}");
+                          "Correct Answers: $correctAnswers/${animalList.length}");
                       generateAlphabetOptions();
                     });
                   }
@@ -167,6 +170,15 @@ class AlphabetPuzzleState extends State<AlphabetPuzzle>
     }
   }
 
+  Future<void> playAnimalSound(String defaultSoundPath, String animalSound) {
+    final audioPlayer = AssetsAudioPlayer();
+    return audioPlayer.open(
+      Audio("$defaultSoundPath$animalSound"),
+      autoStart: true,
+      showNotification: true,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     double deviceHeight = MediaQuery.of(context).size.height;
@@ -174,7 +186,7 @@ class AlphabetPuzzleState extends State<AlphabetPuzzle>
     return Scaffold(
       body: Container(
         padding: const EdgeInsets.only(top: 40),
-        alignment: Alignment.topCenter,
+        alignment: Alignment.center,
         width: deviceWidth,
         height: deviceHeight,
         decoration: BoxDecoration(
@@ -322,7 +334,8 @@ class AlphabetPuzzleState extends State<AlphabetPuzzle>
                 child: ElevatedButton(
                   onPressed: checkAnswer,
                   style: ElevatedButton.styleFrom(
-                    side: const BorderSide(color: Colors.orange, width: 2),
+                    backgroundColor: Colors.lightGreen,
+                    side: const BorderSide(color: Colors.white, width: 5),
                     //backgroundColor: Colors.greenAccent,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
@@ -330,10 +343,68 @@ class AlphabetPuzzleState extends State<AlphabetPuzzle>
                   ),
                   child: const Text(
                     'Check Answer',
-                    style: TextStyle(fontSize: 18),
+                    style: TextStyle(fontSize: 18, color: Colors.white),
                   ),
                 ),
               ),
+              const SizedBox(height: 50),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  FloatingActionButton(
+                    tooltip: 'Previous Animal',
+                    elevation: 10,
+                    backgroundColor: Colors.lightGreen,
+                    shape: const CircleBorder(
+                        side: BorderSide(width: 5, color: Colors.white)),
+                    child: const Icon(Icons.skip_previous, color: Colors.white),
+                    onPressed: () {
+                      setState(() {
+                        if (currentPuzzle != 0) {
+                          currentPuzzle--;
+                          print(
+                              "Correct Answers: $currentPuzzle/${animalList.length}");
+                          generateAlphabetOptions();
+                        }
+                      });
+                    },
+                  ),
+                  FloatingActionButton(
+                    tooltip: 'Animal Sound',
+                    elevation: 10,
+                    backgroundColor: Colors.lightGreen,
+                    shape: const CircleBorder(
+                        side: BorderSide(width: 5, color: Colors.white)),
+                    child:
+                        const Icon(Icons.volume_up_sharp, color: Colors.white),
+                    onPressed: () {
+                      String animalCategory =
+                          animalList[currentPuzzle]['category'];
+                      String animalSound =
+                          animalList[currentPuzzle]['soundPath'];
+                      String defaultSoundPath =
+                          'assets/audio/${animalCategory.toLowerCase()}/';
+                      playAnimalSound(defaultSoundPath, animalSound);
+                    },
+                  ),
+                  FloatingActionButton(
+                    tooltip: 'Next Animal',
+                    elevation: 10,
+                    backgroundColor: Colors.lightGreen,
+                    shape: const CircleBorder(
+                        side: BorderSide(width: 5, color: Colors.white)),
+                    child: const Icon(Icons.skip_next, color: Colors.white),
+                    onPressed: () {
+                      setState(() {
+                        if (currentPuzzle != animalList.length - 1) {
+                          currentPuzzle++;
+                          generateAlphabetOptions();
+                        }
+                      });
+                    },
+                  ),
+                ],
+              )
             ],
           ),
         ),

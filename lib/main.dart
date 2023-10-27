@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:kids_game/animals.dart';
 import 'package:kids_game/imagePuzzle/Core/app_string.dart';
 import 'package:kids_game/imagePuzzle/Services/hive_db.dart';
 import 'package:kids_game/imagePuzzle/Theme/app_theme.dart';
+
+import 'game_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
           primarySwatch: Colors.teal,
           textTheme: Themes.textTheme),
-      home: const AnimalsPage(),
+      home: const AlphabetPuzzle(),
     );
   }
 }
