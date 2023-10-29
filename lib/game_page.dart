@@ -362,8 +362,6 @@ class AlphabetPuzzleState extends State<AlphabetPuzzle>
                       setState(() {
                         if (currentPuzzle != 0) {
                           currentPuzzle--;
-                          print(
-                              "Correct Answers: $currentPuzzle/${animalList.length}");
                           generateAlphabetOptions();
                         }
                       });
