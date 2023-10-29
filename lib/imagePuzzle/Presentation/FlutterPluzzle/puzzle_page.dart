@@ -52,8 +52,13 @@ class _PuzzlePageState extends State<PuzzlePage> {
 
       Offset offset = Offset(xOffset, yOffset);
 
-      var cropImage = image.copyCrop(fullImage, offset.dx.round(),
-          offset.dy.round(), size.width.round(), size.height.round());
+      var cropImage = image.copyCrop(
+        fullImage,
+        x: offset.dx.round(),
+        y: offset.dy.round(),
+        width: size.width.round(),
+        height: size.height.round(),
+      );
       return ObjectsModel(
         defaultPosition: offset,
         currentPosition: offset,
