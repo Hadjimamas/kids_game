@@ -73,7 +73,7 @@ class AnimalsPageState extends State<AnimalsPage> {
                   animalName,
                   style: TextStyle(
                     fontSize: deviceWidth / 15,
-                    color: Colors.pinkAccent,
+                    color: Colors.pink,
                     fontFamily: 'Jungle Hope',
                   ),
                 ),
@@ -90,7 +90,7 @@ class AnimalsPageState extends State<AnimalsPage> {
                           return Image.asset('assets/images/farm/Sheep.PNG');
                         },
                       ),
-                      FloatingActionButton.small(
+                      FloatingActionButton(
                         child: const Icon(Icons.volume_up),
                         onPressed: () {
                           print('Animal Playing: $animalName');

@@ -198,15 +198,15 @@ class AlphabetPuzzleState extends State<AlphabetPuzzle>
         child: SingleChildScrollView(
           child: Column(
             children: [
-              Text(
-                listQuestions[currentPuzzle],
-                style: TextStyle(
-                  color: Colors.deepPurple,
-                  fontSize: deviceWidth / 9,
-                  fontFamily: 'Lovely Kids',
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+              // Text(
+              //   listQuestions[currentPuzzle],
+              //   style: TextStyle(
+              //     color: Colors.deepPurple,
+              //     fontSize: deviceWidth / 9,
+              //     fontFamily: 'Lovely Kids',
+              //     fontWeight: FontWeight.bold,
+              //   ),
+              // ),
               Image.asset(
                 imageUrls[currentPuzzle],
                 width: deviceWidth,
@@ -221,8 +221,9 @@ class AlphabetPuzzleState extends State<AlphabetPuzzle>
                       return Row(
                         children: [
                           Container(
-                            height: 45,
-                            width: 45,
+                            alignment: Alignment.center,
+                            height: deviceWidth / (alphabet.length + 3),
+                            width: deviceWidth / (alphabet.length + 3),
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(8),
@@ -231,15 +232,17 @@ class AlphabetPuzzleState extends State<AlphabetPuzzle>
                                 width: 2,
                               ),
                             ),
-                            child: Text(
-                              userAnswers[index].isEmpty
-                                  ? ' '
-                                  : userAnswers[index],
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                  fontSize: 30,
-                                  color: Colors.green,
-                                  fontWeight: FontWeight.bold),
+                            child: FittedBox(
+                              fit: BoxFit.cover,
+                              child: Text(
+                                userAnswers[index].isEmpty
+                                    ? ' '
+                                    : userAnswers[index],
+                                style: const TextStyle(
+                                    fontSize: 100,
+                                    color: Colors.green,
+                                    fontWeight: FontWeight.bold),
+                              ),
                             ),
                           ),
                           const SizedBox(width: 10),
@@ -257,7 +260,7 @@ class AlphabetPuzzleState extends State<AlphabetPuzzle>
               const SizedBox(height: 15),
               SizedBox(
                 width: deviceWidth,
-                height: 60,
+                height: deviceHeight / 5,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -274,8 +277,8 @@ class AlphabetPuzzleState extends State<AlphabetPuzzle>
                               feedback: Material(
                                 borderRadius: BorderRadius.circular(8),
                                 child: Container(
-                                  height: 55,
-                                  width: 55,
+                                  height: deviceWidth / (alphabet.length + 3),
+                                  width: deviceWidth / (alphabet.length + 3),
                                   decoration: BoxDecoration(
                                     color: Colors.white,
                                     borderRadius: BorderRadius.circular(8),
@@ -285,20 +288,23 @@ class AlphabetPuzzleState extends State<AlphabetPuzzle>
                                     ),
                                   ),
                                   child: Center(
-                                    child: Text(
-                                      alphabet[index],
-                                      style: const TextStyle(
-                                          fontSize: 25,
-                                          color: Colors.orange,
-                                          fontWeight: FontWeight.bold),
+                                    child: FittedBox(
+                                      fit: BoxFit.cover,
+                                      child: Text(
+                                        alphabet[index],
+                                        style: const TextStyle(
+                                            fontSize: 100,
+                                            color: Colors.orange,
+                                            fontWeight: FontWeight.bold),
+                                      ),
                                     ),
                                   ),
                                 ),
                               ),
                               childWhenDragging: Container(),
                               child: Container(
-                                height: 40,
-                                width: 40,
+                                height: deviceWidth / (alphabet.length + 5),
+                                width: deviceWidth / (alphabet.length + 5),
                                 alignment: Alignment.center,
                                 margin:
                                     const EdgeInsets.only(left: 5, right: 5),
@@ -310,12 +316,15 @@ class AlphabetPuzzleState extends State<AlphabetPuzzle>
                                     width: 2,
                                   ),
                                 ),
-                                child: Text(
-                                  alphabet[index],
-                                  style: const TextStyle(
-                                      fontSize: 25,
-                                      color: Colors.red,
-                                      fontWeight: FontWeight.bold),
+                                child: FittedBox(
+                                  fit: BoxFit.cover,
+                                  child: Text(
+                                    alphabet[index],
+                                    style: const TextStyle(
+                                        fontSize: 100,
+                                        color: Colors.red,
+                                        fontWeight: FontWeight.bold),
+                                  ),
                                 ),
                               ),
                             ),
@@ -328,22 +337,34 @@ class AlphabetPuzzleState extends State<AlphabetPuzzle>
               ),
               const SizedBox(height: 30),
               Container(
-                width: deviceWidth / 1.5,
-                height: 60,
+                width: deviceWidth / 1.2,
+                height: 70,
                 padding: const EdgeInsets.only(bottom: 15.0),
-                child: ElevatedButton(
+                child: ElevatedButton.icon(
                   onPressed: checkAnswer,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.lightGreen,
                     side: const BorderSide(color: Colors.white, width: 5),
                     //backgroundColor: Colors.greenAccent,
+                    //shape: const ContinuousRectangleBorder(),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(15),
                     ),
                   ),
-                  child: const Text(
-                    'Check Answer',
-                    style: TextStyle(fontSize: 18, color: Colors.white),
+                  icon: const FittedBox(
+                    fit: BoxFit.cover,
+                    child: Icon(
+                      Icons.check,
+                      color: Colors.white,
+                      size: 100,
+                    ),
+                  ),
+                  label: const FittedBox(
+                    fit: BoxFit.cover,
+                    child: Text(
+                      'Check Answer',
+                      style: TextStyle(fontSize: 100, color: Colors.white),
+                    ),
                   ),
                 ),
               ),
@@ -351,7 +372,7 @@ class AlphabetPuzzleState extends State<AlphabetPuzzle>
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  FloatingActionButton(
+                  FloatingActionButton.large(
                     tooltip: 'Previous Animal',
                     elevation: 10,
                     backgroundColor: Colors.lightGreen,
@@ -367,12 +388,13 @@ class AlphabetPuzzleState extends State<AlphabetPuzzle>
                       });
                     },
                   ),
-                  FloatingActionButton(
+                  FloatingActionButton.large(
                     tooltip: 'Animal Sound',
                     elevation: 10,
                     backgroundColor: Colors.lightGreen,
                     shape: const CircleBorder(
-                        side: BorderSide(width: 5, color: Colors.white)),
+                      side: BorderSide(width: 5, color: Colors.white),
+                    ),
                     child:
                         const Icon(Icons.volume_up_sharp, color: Colors.white),
                     onPressed: () {
@@ -385,7 +407,7 @@ class AlphabetPuzzleState extends State<AlphabetPuzzle>
                       playAnimalSound(defaultSoundPath, animalSound);
                     },
                   ),
-                  FloatingActionButton(
+                  FloatingActionButton.large(
                     tooltip: 'Next Animal',
                     elevation: 10,
                     backgroundColor: Colors.lightGreen,

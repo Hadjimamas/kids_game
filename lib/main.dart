@@ -21,11 +21,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
       theme: ThemeData(
-          useMaterial3: true,
-          primarySwatch: Colors.teal,
-          textTheme: Themes.textTheme),
+        useMaterial3: true,
+        primarySwatch: Colors.teal,
+        textTheme: Themes.textTheme,
+      ),
       home: const AlphabetPuzzle(),
     );
   }

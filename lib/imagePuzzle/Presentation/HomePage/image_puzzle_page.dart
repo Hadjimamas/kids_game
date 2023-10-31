@@ -18,18 +18,19 @@ class ImagePuzzle extends StatefulWidget {
 class ImagePuzzleState extends State<ImagePuzzle> {
   @override
   void initState() {
-    AppAssets.initImages(AppAssets.heroImageAssets, AppAssets.heroImageList);
     AppAssets.initImages(
-        AppAssets.hypnotizeImageAssets, AppAssets.hypnotizeImageList);
+        AppAssets.seasonImagesAssets, AppAssets.seasonImageList);
     AppAssets.initImages(
-        AppAssets.cartoonImageAssets, AppAssets.cartoonImageList);
+        AppAssets.backgroundImageAssets, AppAssets.backgroundImageList);
+    AppAssets.initImages(
+        AppAssets.puzzleImageAssets, AppAssets.cartoonImageList);
     super.initState();
   }
 
   @override
   void didChangeDependencies() {
-    AppAssets.cacheImages(AppAssets.heroImageList, context);
-    AppAssets.cacheImages(AppAssets.hypnotizeImageList, context);
+    AppAssets.cacheImages(AppAssets.seasonImageList, context);
+    AppAssets.cacheImages(AppAssets.backgroundImageList, context);
     AppAssets.cacheImages(AppAssets.cartoonImageList, context);
     super.didChangeDependencies();
   }
@@ -76,12 +77,12 @@ class ImagePuzzleState extends State<ImagePuzzle> {
                   title: "Cartoon Images",
                 ),
                 AssetImageSection(
-                  images: AppAssets.heroImageList,
-                  title: "Hero Images",
+                  images: AppAssets.seasonImageList,
+                  title: "Season Images",
                 ),
                 AssetImageSection(
-                  images: AppAssets.hypnotizeImageList,
-                  title: "Hypnotize Images",
+                  images: AppAssets.backgroundImageList,
+                  title: "Background Images",
                 ),
                 const SizedBox(height: 20),
               ],
