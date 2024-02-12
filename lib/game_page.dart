@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_print
-
 import 'dart:convert';
 
 import 'package:assets_audio_player/assets_audio_player.dart';
@@ -31,7 +29,8 @@ class AlphabetPuzzleState extends State<AlphabetPuzzle>
   List<String> alphabet = [];
   List<String> userAnswers = [];
   late AnimationController _animationController;
-  late Animation<double> _animation;
+
+  //late Animation<double> _animation;
   int currentPuzzle = 0;
   int correctAnswers = 0;
   String response = '';
@@ -45,12 +44,12 @@ class AlphabetPuzzleState extends State<AlphabetPuzzle>
       vsync: this,
       duration: const Duration(milliseconds: 500),
     );
-    _animation = Tween<double>(begin: 0, end: 1).animate(
-      CurvedAnimation(
-        parent: _animationController,
-        curve: Curves.easeInOut,
-      ),
-    );
+    // _animation = Tween<double>(begin: 0, end: 1).animate(
+    //   CurvedAnimation(
+    //     parent: _animationController,
+    //     curve: Curves.easeInOut,
+    //   ),
+    // );
     super.initState();
   }
 
@@ -213,166 +212,141 @@ class AlphabetPuzzleState extends State<AlphabetPuzzle>
                 height: deviceHeight / 3,
               ),
               const SizedBox(height: 10),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: List.generate(userAnswers.length, (index) {
-                  return DragTarget<String>(
-                    builder: (context, candidateData, rejectedData) {
-                      return Row(
-                        children: [
-                          Container(
-                            alignment: Alignment.center,
-                            height: deviceWidth / (alphabet.length + 3),
-                            width: deviceWidth / (alphabet.length + 3),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(8),
-                              border: Border.all(
-                                color: Colors.green,
-                                width: 2,
-                              ),
-                            ),
-                            child: FittedBox(
-                              fit: BoxFit.cover,
-                              child: Text(
-                                userAnswers[index].isEmpty
-                                    ? ' '
-                                    : userAnswers[index],
-                                style: const TextStyle(
-                                    fontSize: 100,
-                                    color: Colors.green,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(width: 10),
-                        ],
-                      );
-                    },
-                    onAccept: (data) {
-                      setState(() {
-                        userAnswers[index] = data;
-                      });
-                    },
-                  );
-                }),
-              ),
-              const SizedBox(height: 15),
-              SizedBox(
-                width: deviceWidth,
-                height: deviceHeight / 5,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ListView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: alphabet.length,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        return Row(
-                          children: [
-                            Draggable<String>(
-                              data: alphabet[index],
-                              feedback: Material(
-                                borderRadius: BorderRadius.circular(8),
-                                child: Container(
+              Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: List.generate(
+                      userAnswers.length,
+                      (index) {
+                        return DragTarget<String>(
+                          builder: (context, candidateData, rejectedData) {
+                            return Row(
+                              children: [
+                                Container(
+                                  alignment: Alignment.center,
                                   height: deviceWidth / (alphabet.length + 3),
                                   width: deviceWidth / (alphabet.length + 3),
                                   decoration: BoxDecoration(
                                     color: Colors.white,
                                     borderRadius: BorderRadius.circular(8),
                                     border: Border.all(
-                                      color: Colors.orange,
+                                      color: Colors.green,
                                       width: 2,
                                     ),
                                   ),
-                                  child: Center(
+                                  child: FittedBox(
+                                    fit: BoxFit.cover,
+                                    child: Text(
+                                      userAnswers[index].isEmpty
+                                          ? ' '
+                                          : userAnswers[index],
+                                      style: const TextStyle(
+                                          fontSize: 100,
+                                          color: Colors.green,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(width: 10),
+                              ],
+                            );
+                          },
+                          onAccept: (data) {
+                            setState(() {
+                              userAnswers[index] = data;
+                            });
+                          },
+                        );
+                      },
+                    ),
+                  ),
+                  //const SizedBox(height: 15),
+                  SizedBox(
+                    width: deviceWidth,
+                    height: deviceHeight / 5,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ListView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: alphabet.length,
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) {
+                            return Row(
+                              children: [
+                                Draggable<String>(
+                                  data: alphabet[index],
+                                  feedback: Material(
+                                    borderRadius: BorderRadius.circular(8),
+                                    child: Container(
+                                      height:
+                                          deviceWidth / (alphabet.length + 3),
+                                      width:
+                                          deviceWidth / (alphabet.length + 3),
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(8),
+                                        border: Border.all(
+                                          color: Colors.orange,
+                                          width: 2,
+                                        ),
+                                      ),
+                                      child: Center(
+                                        child: FittedBox(
+                                          fit: BoxFit.cover,
+                                          child: Text(
+                                            alphabet[index],
+                                            style: const TextStyle(
+                                                fontSize: 100,
+                                                color: Colors.orange,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  childWhenDragging: Container(),
+                                  child: Container(
+                                    height: deviceWidth / (alphabet.length + 5),
+                                    width: deviceWidth / (alphabet.length + 5),
+                                    alignment: Alignment.center,
+                                    margin: const EdgeInsets.only(
+                                        left: 5, right: 5),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(8),
+                                      border: Border.all(
+                                        color: Colors.red,
+                                        width: 2,
+                                      ),
+                                    ),
                                     child: FittedBox(
                                       fit: BoxFit.cover,
                                       child: Text(
                                         alphabet[index],
                                         style: const TextStyle(
                                             fontSize: 100,
-                                            color: Colors.orange,
+                                            color: Colors.red,
                                             fontWeight: FontWeight.bold),
                                       ),
                                     ),
                                   ),
                                 ),
-                              ),
-                              childWhenDragging: Container(),
-                              child: Container(
-                                height: deviceWidth / (alphabet.length + 5),
-                                width: deviceWidth / (alphabet.length + 5),
-                                alignment: Alignment.center,
-                                margin:
-                                    const EdgeInsets.only(left: 5, right: 5),
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(8),
-                                  border: Border.all(
-                                    color: Colors.red,
-                                    width: 2,
-                                  ),
-                                ),
-                                child: FittedBox(
-                                  fit: BoxFit.cover,
-                                  child: Text(
-                                    alphabet[index],
-                                    style: const TextStyle(
-                                        fontSize: 100,
-                                        color: Colors.red,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        );
-                      },
+                              ],
+                            );
+                          },
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-              const SizedBox(height: 30),
-              Container(
-                width: deviceWidth / 1.2,
-                height: 70,
-                padding: const EdgeInsets.only(bottom: 15.0),
-                child: ElevatedButton.icon(
-                  onPressed: checkAnswer,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.lightGreen,
-                    side: const BorderSide(color: Colors.white, width: 5),
-                    //backgroundColor: Colors.greenAccent,
-                    //shape: const ContinuousRectangleBorder(),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                  ),
-                  icon: const FittedBox(
-                    fit: BoxFit.cover,
-                    child: Icon(
-                      Icons.check,
-                      color: Colors.white,
-                      size: 100,
-                    ),
-                  ),
-                  label: const FittedBox(
-                    fit: BoxFit.cover,
-                    child: Text(
-                      'Check Answer',
-                      style: TextStyle(fontSize: 100, color: Colors.white),
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 50),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  FloatingActionButton.large(
+                  FloatingActionButton(
                     tooltip: 'Previous Animal',
                     elevation: 10,
                     backgroundColor: Colors.lightGreen,
@@ -388,7 +362,7 @@ class AlphabetPuzzleState extends State<AlphabetPuzzle>
                       });
                     },
                   ),
-                  FloatingActionButton.large(
+                  FloatingActionButton(
                     tooltip: 'Animal Sound',
                     elevation: 10,
                     backgroundColor: Colors.lightGreen,
@@ -407,7 +381,16 @@ class AlphabetPuzzleState extends State<AlphabetPuzzle>
                       playAnimalSound(defaultSoundPath, animalSound);
                     },
                   ),
-                  FloatingActionButton.large(
+                  FloatingActionButton(
+                    tooltip: 'Check Answer',
+                    elevation: 10,
+                    backgroundColor: Colors.lightGreen,
+                    shape: const CircleBorder(
+                        side: BorderSide(width: 5, color: Colors.white)),
+                    onPressed: checkAnswer,
+                    child: const Icon(Icons.check, color: Colors.white),
+                  ),
+                  FloatingActionButton(
                     tooltip: 'Next Animal',
                     elevation: 10,
                     backgroundColor: Colors.lightGreen,
@@ -424,7 +407,7 @@ class AlphabetPuzzleState extends State<AlphabetPuzzle>
                     },
                   ),
                 ],
-              )
+              ),
             ],
           ),
         ),

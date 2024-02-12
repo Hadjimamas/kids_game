@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:kids_game/home_page.dart';
 import 'package:kids_game/imagePuzzle/Core/app_string.dart';
+import 'package:kids_game/imagePuzzle/Core/app_theme.dart';
 import 'package:kids_game/imagePuzzle/Services/hive_db.dart';
-import 'package:kids_game/imagePuzzle/Theme/app_theme.dart';
 
-import 'animals.dart';
-
-Future<void> main() async {
+void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  await Hive.initFlutter();
-  Hive.registerAdapter<ImageStore>(ImageStoreAdapter());
-  await Hive.openBox<ImageStore>(AppString.dbName);
+  initDB();
   runApp(const MyApp());
+}
+
+Future<void> initDB() async {
+  await Hive.initFlutter();
+  await Hive.openBox<ImageStore>(AppString.dbName);
+  if (!Hive.isAdapterRegistered(0)) {
+    Hive.registerAdapter<ImageStore>(ImageStoreAdapter());
+  }
 }
 
 class MyApp extends StatelessWidget {
@@ -22,11 +27,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        scaffoldBackgroundColor: const Color(0x4C3AB708),
         useMaterial3: true,
         primarySwatch: Colors.teal,
         textTheme: Themes.textTheme,
       ),
-      home: const AnimalsPage(),
+      home: const HomePage(),
     );
   }
 }

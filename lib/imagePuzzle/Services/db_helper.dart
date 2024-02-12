@@ -10,7 +10,7 @@ class LocalDatabase {
 
   static Database? _database;
 
-  static const String tablename = "PhotosTable";
+  static const String tableName = "PhotosTable";
   static const String id = "id";
   static const String name = "photoName";
 
@@ -26,7 +26,7 @@ class LocalDatabase {
     final String path = join(mobilePath, 'favouriteMovieTable.db');
     _database = await openDatabase(path, version: 1,
         onCreate: (Database db, int version) async {
-      await db.execute("CREATE TABLE $tablename($id INTEGER,$name TEXT);");
+      await db.execute("CREATE TABLE $tableName($id INTEGER,$name TEXT);");
     });
 
     return _database!;
@@ -36,7 +36,7 @@ class LocalDatabase {
   Future<PhotoModel> savePhoto({required PhotoModel photoModel}) async {
     var dbClient = await database;
 
-    photoModel.id = await dbClient.insert(tablename, photoModel.toMap());
+    photoModel.id = await dbClient.insert(tableName, photoModel.toMap());
 
     return photoModel;
   }
@@ -44,7 +44,7 @@ class LocalDatabase {
   //Fetch Photo
   Future<List<PhotoModel>> fetchPhotos() async {
     var dbClient = await database;
-    List<Map<String, dynamic>> maps = await dbClient.query(tablename);
+    List<Map<String, dynamic>> maps = await dbClient.query(tableName);
     List<PhotoModel> photos = [];
     if (maps.isNotEmpty) {
       for (var i = 0; i < maps.length; i++) {
