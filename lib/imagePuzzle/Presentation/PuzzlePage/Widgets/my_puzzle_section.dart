@@ -42,9 +42,9 @@ class MyPuzzleSectionState extends State<MyPuzzleSection> {
 
   @override
   void dispose() {
-    //close all hive box wich i created;
+    //close all hive box which i created;
     //Hive.close();
-    //clsoe only a box what we want
+    //close only a box what we want
     //Hive.box(AppString.dbName).close();
     super.dispose();
   }
@@ -118,18 +118,24 @@ class MyPuzzleSectionState extends State<MyPuzzleSection> {
   pickImageFromGallery() async {
     var permission = Permission.storage.request();
     if (!kIsWeb && await permission.isGranted) {
-      imagePicker.pickImage(source: ImageSource.gallery).then((imagFile) async {
-        if (imagFile != null) {
-          String imgString = Utility.base64String(await imagFile.readAsBytes());
+      imagePicker
+          .pickImage(source: ImageSource.gallery)
+          .then((imageFile) async {
+        if (imageFile != null) {
+          String imgString =
+              Utility.base64String(await imageFile.readAsBytes());
           ImageStore imageModel = ImageStore(imageText: imgString);
           final hiveBox = Hive.box<ImageStore>(AppString.dbName);
           hiveBox.add(imageModel);
         }
       });
     } else if (kIsWeb) {
-      imagePicker.pickImage(source: ImageSource.gallery).then((imagFile) async {
-        if (imagFile != null) {
-          String imgString = Utility.base64String(await imagFile.readAsBytes());
+      imagePicker
+          .pickImage(source: ImageSource.gallery)
+          .then((imageFile) async {
+        if (imageFile != null) {
+          String imgString =
+              Utility.base64String(await imageFile.readAsBytes());
           ImageStore imageModel = ImageStore(imageText: imgString);
           final hiveBox = Hive.box<ImageStore>(AppString.dbName);
           hiveBox.add(imageModel);

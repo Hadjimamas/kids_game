@@ -116,7 +116,6 @@ class _PuzzlePageState extends State<PuzzlePage> {
     final minute = twoDigit(duration.inMinutes.remainder(60));
     final second = twoDigit(duration.inSeconds.remainder(60));
     return Scaffold(
-      backgroundColor: AppColors.blueGreyColor,
       appBar: AppBar(
         backgroundColor: AppColors.transparentColor,
         elevation: 0,
@@ -353,27 +352,19 @@ class _PuzzlePageState extends State<PuzzlePage> {
                       height: 35,
                       child: DropdownButtonHideUnderline(
                         child: DropdownButton<String>(
-                          dropdownColor: AppColors.blueGreyColor,
-                          hint: Text(
-                            dropDownSelectedLength ?? 'Custom',
-                            style: const TextStyle(color: AppColors.whiteColor),
-                          ),
+                          //dropdownColor: AppColors.blueGreyColor,
+                          hint: Text(dropDownSelectedLength ?? 'Custom'),
                           value: dropDownSelectedLength,
                           underline: null,
                           isExpanded: true,
-                          icon: const Icon(Icons.arrow_drop_down,
-                              color: AppColors.whiteColor),
+                          icon: const Icon(Icons.arrow_drop_down),
                           items: AppString.puzzleLengthList
                               .map(
                                 (value) => DropdownMenuItem<String>(
                                   value: value,
                                   child: Padding(
                                     padding: const EdgeInsets.only(left: 10),
-                                    child: Text(
-                                      value,
-                                      style: const TextStyle(
-                                          color: AppColors.whiteColor),
-                                    ),
+                                    child: Text(value),
                                   ),
                                 ),
                               )
@@ -447,13 +438,12 @@ class _PuzzlePageState extends State<PuzzlePage> {
       rangeMoves.sort((a, b) => a.currentIndex < b.currentIndex ? 0 : 1);
     }
 
-    // check if rangeMOves is exist,, then proceed switch position
+    // check if rangeMoves is exist,, then proceed switch position
     if (rangeMoves.isNotEmpty) {
       int tempIndex = rangeMoves[0].currentIndex;
 
       Offset tempPos = rangeMoves[0].currentPosition;
 
-      // yeayy.. sorry my mistake.. :)
       for (var i = 0; i < rangeMoves.length - 1; i++) {
         rangeMoves[i].currentIndex = rangeMoves[i + 1].currentIndex;
         rangeMoves[i].currentPosition = rangeMoves[i + 1].currentPosition;

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class ButtonWidget extends StatelessWidget {
   const ButtonWidget({
@@ -21,17 +20,9 @@ class ButtonWidget extends StatelessWidget {
         onPressed: onTap,
         style: OutlinedButton.styleFrom(
           backgroundColor: backgroundColor,
-          side: const BorderSide(
-            color: Colors.teal,
-            width: 3,
-          ),
+          side: const BorderSide(color: Colors.teal, width: 3),
         ),
-        child: Text(
-          text,
-          style: GoogleFonts.poppins(
-            textStyle: const TextStyle(color: Colors.white),
-          ),
-        ),
+        child: Text(text),
       ),
     );
   }

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:kids_game/imagePuzzle/Presentation/FlutterPuzzle/puzzle_page.dart';
 
 import '../../../../main.dart';
-import 'custom_text.dart';
 
 class AssetImageSection extends StatelessWidget {
   const AssetImageSection({
@@ -22,7 +21,7 @@ class AssetImageSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 15),
-          CustomHeadingText(title: title),
+          Text(title),
           const Spacer(),
           SizedBox(
             height: 150,

@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:kids_game/imagePuzzle/Core/app_colors.dart';
+import 'package:kids_game/imagePuzzle/Core/app_assets.dart';
 import 'package:kids_game/imagePuzzle/Core/app_string.dart';
-import 'package:kids_game/imagePuzzle/Core/app_theme.dart';
-import 'package:kids_game/imagePuzzle/Core/assets.dart';
 import 'package:kids_game/imagePuzzle/Services/hive_db.dart';
 
-import 'Widgets/bottom_modal_sheet.dart';
-import 'Widgets/custom_text.dart';
 import 'Widgets/my_puzzle_section.dart';
 import 'Widgets/title_image_section.dart';
 
@@ -52,19 +48,8 @@ class ImagePuzzleState extends State<ImagePuzzle> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: AppColors.transparentColor,
           elevation: 0,
-          title: Text("Puzzle Hack", style: Themes.textTheme.displayLarge),
-          actions: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: IconButton(
-                onPressed: () => bottomModelSheetUI(context),
-                icon: const Icon(Icons.info_outline,
-                    color: AppColors.black54Color, size: 30),
-              ),
-            ),
-          ],
+          title: const Text("Puzzle Hack"),
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -78,7 +63,7 @@ class ImagePuzzleState extends State<ImagePuzzle> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(height: 15),
-                      CustomHeadingText(title: "My Puzzle"),
+                      Text("My Puzzle"),
                       Spacer(),
                       MyPuzzleSection(),
                     ],
