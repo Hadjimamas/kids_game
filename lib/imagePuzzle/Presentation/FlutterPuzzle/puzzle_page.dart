@@ -182,8 +182,9 @@ class _PuzzlePageState extends State<PuzzlePage> {
                 });
               },
               icon: Icon(
-                  showText ? Icons.lightbulb_sharp : Icons.lightbulb_outlined,
-                  color: showText ? Colors.orange : AppColors.greyColor),
+                showText ? Icons.lightbulb_sharp : Icons.lightbulb_outlined,
+                color: showText ? Colors.orange : AppColors.greyColor,
+              ),
             ),
           ),
         ],
@@ -247,7 +248,7 @@ class _PuzzlePageState extends State<PuzzlePage> {
                                   children: [
                                     slideObject.image,
                                     if (showText && !success)
-                                      TextInCircleAvater(
+                                      TextInCircleAvatar(
                                           slideObject: slideObject),
                                   ],
                                 ),
@@ -283,7 +284,7 @@ class _PuzzlePageState extends State<PuzzlePage> {
                                     ),
                                   ),
                                   if (showText && !success)
-                                    TextInCircleAvater(
+                                    TextInCircleAvatar(
                                         slideObject: slideObject),
                                 ],
                               ),
@@ -299,12 +300,13 @@ class _PuzzlePageState extends State<PuzzlePage> {
               const SizedBox(height: 20),
               SizedBox(
                 height: 50,
-                child: ListView(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  //shrinkWrap: true,
+                  //scrollDirection: Axis.horizontal,
                   children: [
                     ButtonWidget(
-                      text: "Easy",
+                      text: "2x2",
                       onTap: () {
                         if (puzzleLength == 0) {
                           puzzleLength = 2;
@@ -316,7 +318,7 @@ class _PuzzlePageState extends State<PuzzlePage> {
                           : AppColors.transparentColor,
                     ),
                     ButtonWidget(
-                      text: "Medium",
+                      text: "3x3",
                       onTap: () {
                         if (puzzleLength == 0) {
                           puzzleLength = 3;
@@ -328,7 +330,7 @@ class _PuzzlePageState extends State<PuzzlePage> {
                           : AppColors.transparentColor,
                     ),
                     ButtonWidget(
-                      text: "Hard",
+                      text: "4x4",
                       onTap: () {
                         if (puzzleLength == 0) {
                           puzzleLength = 4;
@@ -352,8 +354,7 @@ class _PuzzlePageState extends State<PuzzlePage> {
                       height: 35,
                       child: DropdownButtonHideUnderline(
                         child: DropdownButton<String>(
-                          //dropdownColor: AppColors.blueGreyColor,
-                          hint: Text(dropDownSelectedLength ?? 'Custom'),
+                          hint: Text(dropDownSelectedLength ?? 'Other'),
                           value: dropDownSelectedLength,
                           underline: null,
                           isExpanded: true,
@@ -503,7 +504,7 @@ class _PuzzlePageState extends State<PuzzlePage> {
 
         changePos(randKey);
         // ops forgot to swap
-        // hmm bug.. :).. let move 1st with click..check whther bug on swap or change pos
+        // hmm bug.. :).. let move 1st with click..check whether bug on swap or change pos
         swap = !swap;
       }
     }
@@ -513,8 +514,8 @@ class _PuzzlePageState extends State<PuzzlePage> {
   }
 }
 
-class TextInCircleAvater extends StatelessWidget {
-  const TextInCircleAvater({
+class TextInCircleAvatar extends StatelessWidget {
+  const TextInCircleAvatar({
     Key? key,
     required this.slideObject,
   }) : super(key: key);

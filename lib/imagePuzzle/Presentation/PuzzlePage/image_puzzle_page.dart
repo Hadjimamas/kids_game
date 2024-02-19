@@ -4,7 +4,6 @@ import 'package:kids_game/imagePuzzle/Core/app_assets.dart';
 import 'package:kids_game/imagePuzzle/Core/app_string.dart';
 import 'package:kids_game/imagePuzzle/Services/hive_db.dart';
 
-import 'Widgets/my_puzzle_section.dart';
 import 'Widgets/title_image_section.dart';
 
 class ImagePuzzle extends StatefulWidget {
@@ -57,18 +56,18 @@ class ImagePuzzleState extends State<ImagePuzzle> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(
-                  height: 210,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(height: 15),
-                      Text("My Puzzle"),
-                      Spacer(),
-                      MyPuzzleSection(),
-                    ],
-                  ),
-                ),
+                // const SizedBox(
+                //   height: 210,
+                //   child: Column(
+                //     crossAxisAlignment: CrossAxisAlignment.start,
+                //     children: [
+                //       SizedBox(height: 15),
+                //       Text("My Puzzle"),
+                //       Spacer(),
+                //       MyPuzzleSection(),
+                //     ],
+                //   ),
+                // ),
                 AssetImageSection(
                   images: AppAssets.cartoonImageList,
                   title: "Cartoon Images",

@@ -81,11 +81,6 @@ class AlphabetPuzzleState extends State<AlphabetPuzzle>
       backgroundImages.add(
           'assets/images/${animalList[i]['category'].toString().toLowerCase()}/background.jpg');
     }
-    print('**********Lists**********');
-    print(imageUrls);
-    print(listQuestions);
-    print(answers);
-    print(backgroundImages);
   }
 
   ///Generates Alphabets
@@ -141,8 +136,6 @@ class AlphabetPuzzleState extends State<AlphabetPuzzle>
                     setState(() {
                       currentPuzzle++;
                       correctAnswers++;
-                      print(
-                          "Correct Answers: $correctAnswers/${animalList.length}");
                       generateAlphabetOptions();
                     });
                   }

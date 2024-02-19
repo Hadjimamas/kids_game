@@ -11,11 +11,11 @@ class AppAssets {
   static const String puzzleImage1 =
       "assets/images/puzzleImages/puzzleAnimals.png";
   static const String puzzleImage2 =
-      "assets/images/puzzleImages/puzzleNumbers.jpg";
+      "assets/images/puzzleImages/puzzleAnimals3.png";
   static const String puzzleImage3 =
       "assets/images/puzzleImages/puzzleAnimals2.png";
   static const String puzzleImage4 =
-      "assets/images/puzzleImages/puzzleAnimals3.png";
+      "assets/images/puzzleImages/puzzleNumbers.jpg";
   static const String puzzleImage5 =
       "assets/images/puzzleImages/puzzleSeasons.png";
 

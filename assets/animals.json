@@ -77,6 +77,13 @@
     "question": "What animal is this?"
   },
   {
+    "name": "Cock",
+    "imagePath": "Cock.png",
+    "soundPath": "cock.mp3",
+    "category": "Farm",
+    "question": "What animal is this?"
+  },
+  {
     "name": "Pig",
     "imagePath": "Pig.PNG",
     "soundPath": "pig.mp3",
