@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:kids_game/home_page.dart';
 import 'package:kids_game/imagePuzzle/Core/app_string.dart';
@@ -8,6 +9,9 @@ import 'package:kids_game/imagePuzzle/Services/hive_db.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   initDB();
+  //Disable the landscape
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   runApp(const MyApp());
 }
 
