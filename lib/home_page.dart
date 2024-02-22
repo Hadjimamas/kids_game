@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kids_game/animals.dart';
 import 'package:kids_game/game_page.dart';
 import 'package:kids_game/imagePuzzle/Presentation/PuzzlePage/image_puzzle_page.dart';
-import 'package:kids_game/videos_library.dart';
+import 'package:kids_game/videoPlayer/videos_library.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
