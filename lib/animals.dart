@@ -1,11 +1,10 @@
-import 'dart:convert';
-
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class AnimalsPage extends StatefulWidget {
-  const AnimalsPage({super.key});
+  final List<dynamic> animalList;
+
+  const AnimalsPage({super.key, required this.animalList});
 
   @override
   AnimalsPageState createState() => AnimalsPageState();
@@ -15,19 +14,9 @@ enum TtsState { playing, stopped, paused, continued }
 
 class AnimalsPageState extends State<AnimalsPage> {
   final audioPlayer = AssetsAudioPlayer();
-  List<dynamic> animalList = [];
-
-  Future<void> readJson() async {
-    final String response = await rootBundle.loadString('assets/animals.json');
-    List<dynamic> data = json.decode(response);
-    setState(() {
-      animalList.addAll(data);
-    });
-  }
 
   @override
   void initState() {
-    readJson();
     super.initState();
   }
 
@@ -54,17 +43,18 @@ class AnimalsPageState extends State<AnimalsPage> {
             crossAxisSpacing: 50.0, // Spacing between columns
           ),
           padding: const EdgeInsets.all(10),
-          itemCount: animalList.length,
+          itemCount: widget.animalList.length,
           itemBuilder: (context, index) {
-            String animalName = animalList[index]['name'];
-            String animalCategory = animalList[index]['category'];
-            String animalImage = animalList[index]['imagePath'];
-            String animalSound = animalList[index]['soundPath'];
+            String animalName = widget.animalList[index]['name'];
+            String animalCategory = widget.animalList[index]['category'];
+            String animalImage = widget.animalList[index]['imagePath'];
+            String animalSound = widget.animalList[index]['soundPath'];
             String defaultImagePath =
                 'assets/images/${animalCategory.toLowerCase()}/';
             String defaultSoundPath =
                 'assets/audio/${animalCategory.toLowerCase()}/';
-            animalList.sort((a, b) => a['category'].compareTo(b['category']));
+            widget.animalList
+                .sort((a, b) => a['category'].compareTo(b['category']));
             return Column(
               children: [
                 Text(

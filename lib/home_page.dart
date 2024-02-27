@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:kids_game/animal_sound_game.dart';
 import 'package:kids_game/animals.dart';
-import 'package:kids_game/game_page.dart';
 import 'package:kids_game/imagePuzzle/Presentation/PuzzlePage/image_puzzle_page.dart';
 import 'package:kids_game/videoPlayer/videos_library.dart';
 
@@ -13,9 +16,20 @@ class HomePage extends StatefulWidget {
 
 class HomePageState extends State<HomePage> {
   int currentPageIndex = 0;
+  List<dynamic> animalList = [];
+
+  Future<void> readJson() async {
+    final String response = await rootBundle.loadString('assets/animals.json');
+    List<dynamic> data = json.decode(response);
+    setState(() {
+      animalList.addAll(data);
+      animalList.sort((a, b) => a['category'].compareTo(b['category']));
+    });
+  }
 
   @override
   void initState() {
+    readJson();
     super.initState();
   }
 
@@ -54,8 +68,9 @@ class HomePageState extends State<HomePage> {
         ],
       ),
       body: <Widget>[
-        const AnimalsPage(),
-        const AlphabetPuzzle(),
+        AnimalsPage(animalList: animalList),
+        FindAnimalSound(animalList: animalList),
+        //const AlphabetPuzzle(),
         const ImagePuzzle(),
         const VideosLibrary()
       ][currentPageIndex],

@@ -34,7 +34,7 @@ android {
 
     defaultConfig {
         applicationId "com.game.kids.kids_game"
-        minSdkVersion 23
+        minSdkVersion 24
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
