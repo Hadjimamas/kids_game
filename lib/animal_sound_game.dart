@@ -27,11 +27,49 @@ class FindAnimalSoundState extends State<FindAnimalSound> {
     );
   }
 
+  Future<void> _showMyDialog(
+      String title, String bodyMsg, bool isCorrect) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(title),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text(bodyMsg),
+                //Text('Would you like to approve of this message?'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Close'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            if (isCorrect)
+              TextButton(
+                child: const Text('Next'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    double deviceHeight = MediaQuery.of(context).size.height;
+    double deviceWidth = MediaQuery.of(context).size.width;
     List<int> randomNumbersList = [];
     List<int> shuffleList = [];
-    for (var i = 0; i < 3; i++) {
+    for (var i = 0; i < 4; i++) {
       int randomInt = Random().nextInt(widget.animalList.length);
       randomNumbersList.add(randomInt);
       shuffleList.add(randomInt);
@@ -39,37 +77,80 @@ class FindAnimalSoundState extends State<FindAnimalSound> {
     shuffleList.shuffle();
     int random = Random().nextInt(shuffleList.length);
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Expanded(
-            child: ListView.separated(
-                scrollDirection: Axis.horizontal,
+      body: Container(
+        padding: const EdgeInsets.only(top: 40, bottom: 20),
+        alignment: Alignment.center,
+        width: deviceWidth,
+        height: deviceHeight,
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/background.png'),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Which animals has this sound?',
+              style: TextStyle(
+                fontSize: deviceWidth / 15,
+                color: Colors.pink,
+                fontFamily: 'Mansalva',
+              ),
+            ),
+            Expanded(
+              child: GridView.builder(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2, // Number of items in each row
+                  mainAxisSpacing: 50.0, // Spacing between rows
+                  crossAxisSpacing: 50.0, // Spacing between columns
+                ),
+                padding: const EdgeInsets.all(10),
                 itemCount: randomNumbersList.length,
                 itemBuilder: (context, index) {
-                  return Image.asset(
-                      width: 200,
-                      height: 200,
-                      'assets/images/${widget.animalList[randomNumbersList[index]]['category'].toString().toLowerCase()}/${widget.animalList[randomNumbersList[index]]['imagePath']}');
+                  String gridAnimal =
+                      widget.animalList[randomNumbersList[index]]['name'];
+                  String correctAnimal =
+                      widget.animalList[shuffleList[random]]['name'];
+                  return InkWell(
+                    onTap: () {
+                      print('Correct answer: $correctAnimal');
+                      print('Selected: $gridAnimal');
+                      if (correctAnimal == gridAnimal) {
+                        _showMyDialog(
+                          "That's Correct!",
+                          'The animals is: $correctAnimal',
+                          true,
+                        );
+                      } else {
+                        _showMyDialog("Wrong Answer", 'Try again!', false);
+                      }
+                    },
+                    child: Image.asset(
+                        width: deviceWidth / 2,
+                        height: deviceHeight,
+                        'assets/images/${widget.animalList[randomNumbersList[index]]['category'].toString().toLowerCase()}/${widget.animalList[randomNumbersList[index]]['imagePath']}'),
+                  );
                 },
-                separatorBuilder: (context, index) =>
-                    const SizedBox(width: 10)),
-          ),
-          TextButton.icon(
-            onPressed: () {
-              String animalCategory =
-                  widget.animalList[shuffleList[random]]['category'];
-              String animalSound =
-                  widget.animalList[shuffleList[random]]['soundPath'];
-              String defaultSoundPath =
-                  'assets/audio/${animalCategory.toLowerCase()}/';
-              playAnimalSound(defaultSoundPath, animalSound);
-              print('Animal Sound: $animalSound');
-            },
-            icon: const Icon(Icons.volume_up_sharp),
-            label: const Text('Animal Sound'),
-          ),
-        ],
+              ),
+            ),
+            TextButton.icon(
+              onPressed: () {
+                String animalCategory =
+                    widget.animalList[shuffleList[random]]['category'];
+                String animalSound =
+                    widget.animalList[shuffleList[random]]['soundPath'];
+                String defaultSoundPath =
+                    'assets/audio/${animalCategory.toLowerCase()}/';
+                playAnimalSound(defaultSoundPath, animalSound);
+                print('Animal Sound: $animalSound');
+              },
+              icon: const Icon(Icons.volume_up_sharp),
+              label: const Text('Animal Sound'),
+            ),
+          ],
+        ),
       ),
     );
   }
