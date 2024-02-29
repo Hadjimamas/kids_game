@@ -34,6 +34,10 @@ class FindAnimalSoundState extends State<FindAnimalSound> {
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
+          titleTextStyle: const TextStyle(
+              fontFamily: 'Jungle Hope', color: Colors.deepPurpleAccent),
+          contentTextStyle: const TextStyle(
+              fontFamily: 'Jungle Hope', color: Colors.deepPurpleAccent),
           title: Text(title),
           content: SingleChildScrollView(
             child: ListBody(
@@ -50,13 +54,13 @@ class FindAnimalSoundState extends State<FindAnimalSound> {
                 Navigator.of(context).pop();
               },
             ),
-            if (isCorrect)
-              TextButton(
-                child: const Text('Next'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
+            // if (isCorrect)
+            //   TextButton(
+            //     child: const Text('Next'),
+            //     onPressed: () {
+            //       Navigator.of(context).pop();
+            //     },
+            //   ),
           ],
         );
       },
@@ -71,15 +75,18 @@ class FindAnimalSoundState extends State<FindAnimalSound> {
     List<int> shuffleList = [];
     for (var i = 0; i < 4; i++) {
       int randomInt = Random().nextInt(widget.animalList.length);
-      randomNumbersList.add(randomInt);
-      shuffleList.add(randomInt);
+      if (randomNumbersList.contains(randomInt)) {
+        i--;
+      } else {
+        randomNumbersList.add(randomInt);
+        shuffleList.add(randomInt);
+      }
     }
     shuffleList.shuffle();
     int random = Random().nextInt(shuffleList.length);
     return Scaffold(
       body: Container(
         padding: const EdgeInsets.only(top: 40, bottom: 20),
-        alignment: Alignment.center,
         width: deviceWidth,
         height: deviceHeight,
         decoration: const BoxDecoration(
@@ -89,53 +96,63 @@ class FindAnimalSoundState extends State<FindAnimalSound> {
           ),
         ),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              'Which animals has this sound?',
-              style: TextStyle(
-                fontSize: deviceWidth / 15,
-                color: Colors.pink,
-                fontFamily: 'Mansalva',
+            Padding(
+              padding: const EdgeInsets.only(top: 30.0),
+              child: Text(
+                'Which animals has this sound?',
+                style: TextStyle(
+                  fontSize: deviceWidth / 15,
+                  color: Colors.deepPurpleAccent,
+                  fontFamily: 'Mansalva',
+                ),
               ),
             ),
             Expanded(
-              child: GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2, // Number of items in each row
-                  mainAxisSpacing: 50.0, // Spacing between rows
-                  crossAxisSpacing: 50.0, // Spacing between columns
+              child: Center(
+                child: GridView.builder(
+                  shrinkWrap: true,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2, // Number of items in each row
+                    mainAxisSpacing: 50.0, // Spacing between rows
+                    crossAxisSpacing: 50.0, // Spacing between columns
+                  ),
+                  padding: const EdgeInsets.all(10),
+                  itemCount: randomNumbersList.length,
+                  itemBuilder: (context, index) {
+                    String gridAnimal =
+                        widget.animalList[randomNumbersList[index]]['name'];
+                    String correctAnimal =
+                        widget.animalList[shuffleList[random]]['name'];
+                    return InkWell(
+                      onTap: () {
+                        print('Correct answer: $correctAnimal');
+                        print('Selected: $gridAnimal');
+                        if (correctAnimal == gridAnimal) {
+                          _showMyDialog(
+                              "That's Correct!",
+                              '$correctAnimal is the animal we are looking for',
+                              true);
+                        } else {
+                          _showMyDialog("Wrong Answer", 'Try again!', false);
+                        }
+                      },
+                      child: Image.asset(
+                          width: deviceWidth / 2,
+                          height: deviceHeight,
+                          'assets/images/${widget.animalList[randomNumbersList[index]]['category'].toString().toLowerCase()}/${widget.animalList[randomNumbersList[index]]['imagePath']}'),
+                    );
+                  },
                 ),
-                padding: const EdgeInsets.all(10),
-                itemCount: randomNumbersList.length,
-                itemBuilder: (context, index) {
-                  String gridAnimal =
-                      widget.animalList[randomNumbersList[index]]['name'];
-                  String correctAnimal =
-                      widget.animalList[shuffleList[random]]['name'];
-                  return InkWell(
-                    onTap: () {
-                      print('Correct answer: $correctAnimal');
-                      print('Selected: $gridAnimal');
-                      if (correctAnimal == gridAnimal) {
-                        _showMyDialog(
-                          "That's Correct!",
-                          'The animals is: $correctAnimal',
-                          true,
-                        );
-                      } else {
-                        _showMyDialog("Wrong Answer", 'Try again!', false);
-                      }
-                    },
-                    child: Image.asset(
-                        width: deviceWidth / 2,
-                        height: deviceHeight,
-                        'assets/images/${widget.animalList[randomNumbersList[index]]['category'].toString().toLowerCase()}/${widget.animalList[randomNumbersList[index]]['imagePath']}'),
-                  );
-                },
               ),
             ),
             TextButton.icon(
+              style: OutlinedButton.styleFrom(
+                side: const BorderSide(
+                  width: 3.0,
+                  color: Colors.white,
+                ),
+              ),
               onPressed: () {
                 String animalCategory =
                     widget.animalList[shuffleList[random]]['category'];
