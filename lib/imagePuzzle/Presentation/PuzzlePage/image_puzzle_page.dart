@@ -17,12 +17,17 @@ class ImagePuzzleState extends State<ImagePuzzle> {
   @override
   void initState() {
     initDB();
-    AppAssets.initImages(
-        AppAssets.seasonImagesAssets, AppAssets.seasonImageList);
-    AppAssets.initImages(
-        AppAssets.backgroundImageAssets, AppAssets.backgroundImageList);
-    AppAssets.initImages(
-        AppAssets.puzzleImageAssets, AppAssets.cartoonImageList);
+    if (AppAssets.seasonImageList.isEmpty ||
+        AppAssets.backgroundImageList.isEmpty ||
+        AppAssets.cartoonImageList.isEmpty) {
+      AppAssets.initImages(
+          AppAssets.seasonImagesAssets, AppAssets.seasonImageList);
+
+      AppAssets.initImages(
+          AppAssets.backgroundImageAssets, AppAssets.backgroundImageList);
+      AppAssets.initImages(
+          AppAssets.puzzleImageAssets, AppAssets.cartoonImageList);
+    }
     super.initState();
   }
 
