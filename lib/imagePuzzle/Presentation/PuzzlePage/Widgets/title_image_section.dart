@@ -21,7 +21,10 @@ class AssetImageSection extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 15),
-          Text(title),
+          Text(
+            title,
+            style: const TextStyle(fontFamily: 'Lovely Kids'),
+          ),
           const Spacer(),
           SizedBox(
             height: 150,

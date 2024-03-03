@@ -52,8 +52,10 @@ class ImagePuzzleState extends State<ImagePuzzle> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          elevation: 0,
-          title: const Text("Puzzle Hack"),
+          title: const Text(
+            "Puzzles Library",
+            style: TextStyle(fontFamily: 'Mansalva'),
+          ),
         ),
         body: SingleChildScrollView(
           child: Padding(
