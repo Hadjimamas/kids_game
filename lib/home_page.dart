@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:kids_game/animal_sound_game.dart';
 import 'package:kids_game/animals.dart';
+import 'package:kids_game/game_page.dart';
 import 'package:kids_game/imagePuzzle/Presentation/PuzzlePage/image_puzzle_page.dart';
 import 'package:kids_game/videoPlayer/videos_library.dart';
 
@@ -61,6 +62,11 @@ class HomePageState extends State<HomePage> {
             label: 'Puzzles',
           ),
           NavigationDestination(
+            icon: Icon(Icons.abc_outlined),
+            selectedIcon: Icon(Icons.abc),
+            label: 'Find Word',
+          ),
+          NavigationDestination(
             icon: Icon(Icons.video_collection_outlined),
             selectedIcon: Icon(Icons.video_collection),
             label: 'Videos',
@@ -70,8 +76,8 @@ class HomePageState extends State<HomePage> {
       body: <Widget>[
         AnimalsPage(animalList: animalList),
         FindAnimalSound(animalList: animalList),
-        //const AlphabetPuzzle(),
         const ImagePuzzle(),
+        const AlphabetPuzzle(),
         const VideosLibrary()
       ][currentPageIndex],
     );
