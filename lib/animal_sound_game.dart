@@ -33,7 +33,7 @@ class FindAnimalSoundState extends State<FindAnimalSound> {
       context: context,
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
-        return AlertDialog(
+        return AlertDialog.adaptive(
           titleTextStyle: const TextStyle(
               fontFamily: 'Jungle Hope', color: Colors.deepPurpleAccent),
           contentTextStyle: const TextStyle(
