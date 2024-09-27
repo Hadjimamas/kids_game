@@ -1,8 +1,7 @@
 import 'dart:convert';
-
-import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:just_audio/just_audio.dart';
 
 class AlphabetPuzzle extends StatefulWidget {
   const AlphabetPuzzle({Key? key}) : super(key: key);
@@ -163,12 +162,18 @@ class AlphabetPuzzleState extends State<AlphabetPuzzle>
   }
 
   Future<void> playAnimalSound(String defaultSoundPath, String animalSound) {
-    final audioPlayer = AssetsAudioPlayer();
-    return audioPlayer.open(
-      Audio("$defaultSoundPath$animalSound"),
-      autoStart: true,
-      showNotification: true,
+    //final audioPlayer = AssetsAudioPlayer();
+    final audioPlayer = AudioPlayer();
+    audioPlayer.setAsset(
+        "$defaultSoundPath$animalSound"
     );
+
+    return audioPlayer.play();
+    // return audioPlayer.open(
+    //   Audio("$defaultSoundPath$animalSound"),
+    //   autoStart: true,
+    //   showNotification: true,
+    // );
   }
 
   @override

@@ -1,5 +1,6 @@
-import 'package:assets_audio_player/assets_audio_player.dart';
+
 import 'package:flutter/material.dart';
+import 'package:just_audio/just_audio.dart';
 
 class AnimalsPage extends StatefulWidget {
   final List<dynamic> animalList;
@@ -13,7 +14,7 @@ class AnimalsPage extends StatefulWidget {
 enum TtsState { playing, stopped, paused, continued }
 
 class AnimalsPageState extends State<AnimalsPage> {
-  final audioPlayer = AssetsAudioPlayer();
+  final audioPlayer = AudioPlayer();
 
   @override
   void initState() {
@@ -82,11 +83,15 @@ class AnimalsPageState extends State<AnimalsPage> {
                         child: const Icon(Icons.volume_up),
                         onPressed: () {
                           print('Animal Playing: $animalName');
-                          audioPlayer.open(
-                            Audio("$defaultSoundPath$animalSound"),
-                            autoStart: true,
-                            showNotification: true,
+                          audioPlayer.setAsset(
+                              "$defaultSoundPath$animalSound"
                           );
+                          audioPlayer.play();
+                          // audioPlayer.open(
+                          //   Audio("$defaultSoundPath$animalSound"),
+                          //   autoStart: true,
+                          //   showNotification: true,
+                          // );
                         },
                       ),
                     ],
