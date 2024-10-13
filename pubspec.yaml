@@ -10,16 +10,16 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.8
   #assets_audio_player: ^3.1.1
-  just_audio: ^0.9.40
+  just_audio: ^0.9.41
   image: ^4.2.0
-  sqflite: ^2.3.3+1
+  sqflite: ^2.4.0
   dotted_border: ^2.1.0
   permission_handler: ^11.3.1
   image_picker: ^1.1.2
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   path: ^1.9.0
-  youtube_player_flutter: ^9.1.0
+  youtube_player_flutter: ^9.1.1
   flutter_launcher_icons: ^0.14.1
 dev_dependencies:
   flutter_test:
