@@ -1,5 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:kids_game/ad_helper.dart';
 import 'package:kids_game/imagePuzzle/Core/app_assets.dart';
 import 'package:kids_game/imagePuzzle/Core/app_string.dart';
 import 'package:kids_game/imagePuzzle/Services/hive_db.dart';
@@ -14,8 +17,34 @@ class ImagePuzzle extends StatefulWidget {
 }
 
 class ImagePuzzleState extends State<ImagePuzzle> {
+  late BannerAd staticAd;
+  bool staticAdLoaded = false;
+
+  void loadStaticBannerAd() {
+    MobileAds.instance.updateRequestConfiguration(
+      RequestConfiguration(testDeviceIds: AdHelper.testDevices),
+    );
+    staticAd = BannerAd(
+      size: AdSize.banner,
+      request: AdHelper.request,
+      adUnitId: AdHelper.bannerAdUnitId,
+      listener: BannerAdListener(onAdLoaded: (ad) {
+        setState(() {
+          staticAdLoaded = true;
+        });
+      }, onAdFailedToLoad: (ad, error) {
+        ad.dispose();
+        debugPrint('Banner Ad Failed to Load: ${error.message}');
+      }),
+    );
+    staticAd.load();
+  }
+
   @override
   void initState() {
+    if (!kIsWeb) {
+      loadStaticBannerAd();
+    }
     initDB();
     if (AppAssets.seasonImageList.isEmpty ||
         AppAssets.backgroundImageList.isEmpty ||
@@ -61,7 +90,7 @@ class ImagePuzzleState extends State<ImagePuzzle> {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 // const SizedBox(
                 //   height: 210,
@@ -88,6 +117,13 @@ class ImagePuzzleState extends State<ImagePuzzle> {
                   title: "Background Images",
                 ),
                 const SizedBox(height: 20),
+                if (staticAdLoaded)
+                  Container(
+                    width: staticAd.size.width.toDouble(),
+                    height: staticAd.size.height.toDouble(),
+                    alignment: Alignment.bottomCenter,
+                    child: AdWidget(ad: staticAd),
+                  ),
               ],
             ),
           ),

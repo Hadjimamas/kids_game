@@ -187,5 +187,12 @@
     "soundPath": "parrot.mp3",
     "category": "Tropical",
     "question": "What animal is this?"
+  },
+  {
+    "name": "Frog",
+    "imagePath": "Frog.png",
+    "soundPath": "frog.mp3",
+    "category": "Tropical",
+    "question": "What animal is this?"
   }
 ]

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:kids_game/home_page.dart';
 import 'package:kids_game/imagePuzzle/Core/app_string.dart';
@@ -8,6 +9,7 @@ import 'package:kids_game/imagePuzzle/Services/hive_db.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  MobileAds.instance.initialize();
   initDB();
   //Disable the landscape
   SystemChrome.setPreferredOrientations(
