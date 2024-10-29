@@ -17,11 +17,11 @@ class AdHelper {
     }
     return 'Unsupported platform';
   }
-  static String get bottomBannerAdUnitId {
+  static String get rewardAd {
     if (Platform.isAndroid) {
-      return 'ca-app-pub-4707430774132554/2028329439';
+      return 'ca-app-pub-3940256099942544/5224354917';
     } else if (Platform.isIOS) {
-      return 'ca-app-pub-4707430774132554/8728275241';
+      return 'ca-app-pub-3940256099942544/1712485313';
     }
     return 'Unsupported platform';
   }

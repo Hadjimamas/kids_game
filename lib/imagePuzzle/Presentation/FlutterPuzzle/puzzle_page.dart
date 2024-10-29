@@ -6,7 +6,9 @@ import 'dart:ui';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:image/image.dart' as image;
+import 'package:kids_game/ad_helper.dart';
 import 'package:kids_game/imagePuzzle/Core/app_colors.dart';
 import 'package:kids_game/imagePuzzle/Core/app_string.dart';
 import 'package:kids_game/imagePuzzle/Model/object_model.dart';
@@ -40,6 +42,28 @@ class _PuzzlePageState extends State<PuzzlePage> {
   Duration duration = const Duration();
   String? dropDownSelectedLength;
   late double _width;
+  late RewardedAd _rewardedAd;
+
+  /// Loads a rewarded ad.
+  void loadRewardAd() {
+    RewardedAd.load(
+      adUnitId: AdHelper.rewardAd,
+      request: const AdRequest(),
+      rewardedAdLoadCallback: RewardedAdLoadCallback(
+        // Called when an ad is successfully received.
+        onAdLoaded: (ad) {
+          debugPrint('Reward Ad Loaded');
+          // Keep a reference to the ad so you can show it later.
+          _rewardedAd = ad;
+        },
+        // Called when an ad request failed.
+        onAdFailedToLoad: (LoadAdError error) {
+          _rewardedAd.dispose();
+          debugPrint('RewardedAd failed to load: $error');
+        },
+      ),
+    );
+  }
 
   fillSlideObject() async {
     fullImage = await getImage();
@@ -99,6 +123,12 @@ class _PuzzlePageState extends State<PuzzlePage> {
         duration = Duration(seconds: seconds);
       });
     });
+  }
+
+  @override
+  void initState() {
+    loadRewardAd();
+    super.initState();
   }
 
   @override
@@ -178,7 +208,11 @@ class _PuzzlePageState extends State<PuzzlePage> {
               tooltip: "Hint",
               onPressed: () {
                 setState(() {
-                  showText = !showText;
+                  _rewardedAd.show(onUserEarnedReward:
+                      (AdWithoutView ad, RewardItem rewardItem) {
+                    // Reward the user for watching an ad.
+                    showText = !showText;
+                  });
                 });
               },
               icon: Icon(
