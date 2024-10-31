@@ -10,6 +10,8 @@
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<key>GADApplicationIdentifier</key>
+    <string>ca-app-pub-4707430774132554~9463812730</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -244,7 +246,5 @@
         <string>3qcr597p9d.skadnetwork</string>
       </dict>
     </array>
-    <key>GADApplicationIdentifier</key>
-    <string>ca-app-pub-4707430774132554~9463812730</string>
 </dict>
 </plist>

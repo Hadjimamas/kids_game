@@ -3,9 +3,12 @@ import 'dart:io';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class AdHelper {
-  static List<String> testDevices = ['4195558a9e3c9d743ba4ca7e89ebc80e','9B646DF252896C19378152D9D8458F7A'];
+  static List<String> testDevices = [
+    '4195558a9e3c9d743ba4ca7e89ebc80e',
+    '9B646DF252896C19378152D9D8458F7A'
+  ];
   static AdRequest request = const AdRequest(
-      keywords: ['Radio,Cyprus'],
+      keywords: ['Kids,Puzzle,Animals,Sounds,Seasons'],
       nonPersonalizedAds: false,
       contentUrl: 'Hadjimamas.github.io');
 
@@ -13,10 +16,12 @@ class AdHelper {
     if (Platform.isAndroid) {
       return 'ca-app-pub-4707430774132554/7978506522';
     } else if (Platform.isIOS) {
-      return 'ca-app-pub-4707430774132554/1994546518';
+      return 'ca-app-pub-3940256099942544/2934735716';
+      //return 'ca-app-pub-4707430774132554/1994546518';
     }
     return 'Unsupported platform';
   }
+
   static String get rewardAd {
     if (Platform.isAndroid) {
       return 'ca-app-pub-3940256099942544/5224354917';
@@ -25,6 +30,7 @@ class AdHelper {
     }
     return 'Unsupported platform';
   }
+
   static String get interstitialAdUnitId {
     if (Platform.isAndroid) {
       return 'ca-app-pub-4707430774132554/8325872724';
