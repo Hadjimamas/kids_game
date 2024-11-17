@@ -24,7 +24,7 @@ class AdHelper {
 
   static String get rewardAd {
     if (Platform.isAndroid) {
-      return 'ca-app-pub-3940256099942544/5224354917';
+      return 'ca-app-pub-4707430774132554/5706294882';
     } else if (Platform.isIOS) {
       return 'ca-app-pub-3940256099942544/1712485313';
     }
@@ -36,6 +36,14 @@ class AdHelper {
       return 'ca-app-pub-4707430774132554/8325872724';
     } else if (Platform.isIOS) {
       return 'ca-app-pub-4707430774132554/5605702394';
+    }
+    return 'Unsupported platform';
+  }
+  static String get mediumRectangleAdUnitId {
+    if (Platform.isAndroid) {
+      return 'ca-app-pub-4707430774132554/2196353343';
+    } else if (Platform.isIOS) {
+      return 'ca-app-pub-3940256099942544/2934735716';
     }
     return 'Unsupported platform';
   }

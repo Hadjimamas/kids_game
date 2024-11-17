@@ -108,14 +108,6 @@ class ImagePuzzleState extends State<ImagePuzzle> {
                   images: AppAssets.cartoonImageList,
                   title: "Cartoon Images",
                 ),
-                AssetImageSection(
-                  images: AppAssets.seasonImageList,
-                  title: "Season Images",
-                ),
-                AssetImageSection(
-                  images: AppAssets.backgroundImageList,
-                  title: "Background Images",
-                ),
                 const SizedBox(height: 20),
                 if (staticAdLoaded)
                   Container(
@@ -124,6 +116,14 @@ class ImagePuzzleState extends State<ImagePuzzle> {
                     alignment: Alignment.bottomCenter,
                     child: AdWidget(ad: staticAd),
                   ),
+                AssetImageSection(
+                  images: AppAssets.seasonImageList,
+                  title: "Season Images",
+                ),
+                AssetImageSection(
+                  images: AppAssets.backgroundImageList,
+                  title: "Background Images",
+                ),
               ],
             ),
           ),

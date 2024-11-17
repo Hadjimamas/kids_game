@@ -43,10 +43,30 @@ class _PuzzlePageState extends State<PuzzlePage> {
   String? dropDownSelectedLength;
   late double _width;
   late RewardedAd _rewardedAd;
+  late BannerAd rectangleAd;
+  bool rectangleAdLoaded = false;
+  bool isVisible = true;
+
+  void loadRectangleAd() {
+    rectangleAd = BannerAd(
+      size: AdSize.mediumRectangle,
+      request: const AdRequest(),
+      adUnitId: AdHelper.mediumRectangleAdUnitId,
+      listener: BannerAdListener(onAdLoaded: (ad) {
+        setState(() {
+          rectangleAdLoaded = true;
+        });
+      }, onAdFailedToLoad: (ad, error) {
+        ad.dispose();
+        debugPrint('Ad Failed to load: ${error.message}');
+      }),
+    );
+    rectangleAd.load();
+  }
 
   /// Loads a rewarded ad.
-  void loadRewardAd() {
-    RewardedAd.load(
+  void loadRewardAd() async {
+    await RewardedAd.load(
       adUnitId: AdHelper.rewardAd,
       request: const AdRequest(),
       rewardedAdLoadCallback: RewardedAdLoadCallback(
@@ -127,6 +147,7 @@ class _PuzzlePageState extends State<PuzzlePage> {
 
   @override
   void initState() {
+    loadRectangleAd();
     loadRewardAd();
     super.initState();
   }
@@ -332,93 +353,114 @@ class _PuzzlePageState extends State<PuzzlePage> {
                 ),
               ),
               const SizedBox(height: 20),
-              SizedBox(
-                height: 50,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  //shrinkWrap: true,
-                  //scrollDirection: Axis.horizontal,
-                  children: [
-                    ButtonWidget(
-                      text: "2x2",
-                      onTap: () {
-                        if (puzzleLength == 0) {
-                          puzzleLength = 2;
-                          fillSlideObject();
-                        }
-                      },
-                      backgroundColor: puzzleLength == 2
-                          ? AppColors.primaryColor
-                          : AppColors.transparentColor,
-                    ),
-                    ButtonWidget(
-                      text: "3x3",
-                      onTap: () {
-                        if (puzzleLength == 0) {
-                          puzzleLength = 3;
-                          fillSlideObject();
-                        }
-                      },
-                      backgroundColor: puzzleLength == 3
-                          ? AppColors.primaryColor
-                          : AppColors.transparentColor,
-                    ),
-                    ButtonWidget(
-                      text: "4x4",
-                      onTap: () {
-                        if (puzzleLength == 0) {
-                          puzzleLength = 4;
-                          fillSlideObject();
-                        }
-                      },
-                      backgroundColor: puzzleLength == 4
-                          ? AppColors.primaryColor
-                          : AppColors.transparentColor,
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: AppColors.transparentColor,
-                        border:
-                            Border.all(color: AppColors.primaryColor, width: 4),
-                        borderRadius: BorderRadius.circular(5),
+              Offstage(
+                offstage: !isVisible,
+                child: SizedBox(
+                  height: 50,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    //shrinkWrap: true,
+                    //scrollDirection: Axis.horizontal,
+                    children: [
+                      ButtonWidget(
+                        text: "2x2",
+                        onTap: () {
+                          if (puzzleLength == 0) {
+                            puzzleLength = 2;
+                            fillSlideObject();
+                          }
+                          setState(() {
+                            isVisible = !isVisible;
+                          });
+                        },
+                        backgroundColor: puzzleLength == 2
+                            ? AppColors.primaryColor
+                            : AppColors.transparentColor,
                       ),
-                      padding: const EdgeInsets.only(left: 2),
-                      alignment: Alignment.center,
-                      width: 90,
-                      height: 35,
-                      child: DropdownButtonHideUnderline(
-                        child: DropdownButton<String>(
-                          hint: Text(dropDownSelectedLength ?? 'Other'),
-                          value: dropDownSelectedLength,
-                          underline: null,
-                          isExpanded: true,
-                          icon: const Icon(Icons.arrow_drop_down),
-                          items: AppString.puzzleLengthList
-                              .map(
-                                (value) => DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(left: 10),
-                                    child: Text(value),
+                      ButtonWidget(
+                        text: "3x3",
+                        onTap: () {
+                          if (puzzleLength == 0) {
+                            puzzleLength = 3;
+                            fillSlideObject();
+                          }
+                          setState(() {
+                            isVisible = !isVisible;
+                          });
+                        },
+                        backgroundColor: puzzleLength == 3
+                            ? AppColors.primaryColor
+                            : AppColors.transparentColor,
+                      ),
+                      ButtonWidget(
+                        text: "4x4",
+                        onTap: () {
+                          if (puzzleLength == 0) {
+                            puzzleLength = 4;
+                            fillSlideObject();
+                          }
+                          setState(() {
+                            isVisible = !isVisible;
+                          });
+                        },
+                        backgroundColor: puzzleLength == 4
+                            ? AppColors.primaryColor
+                            : AppColors.transparentColor,
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: AppColors.transparentColor,
+                          border: Border.all(
+                              color: AppColors.primaryColor, width: 4),
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        padding: const EdgeInsets.only(left: 2),
+                        alignment: Alignment.center,
+                        width: 90,
+                        height: 35,
+                        child: DropdownButtonHideUnderline(
+                          child: DropdownButton<String>(
+                            hint: Text(dropDownSelectedLength ?? 'Other'),
+                            value: dropDownSelectedLength,
+                            underline: null,
+                            isExpanded: true,
+                            icon: const Icon(Icons.arrow_drop_down),
+                            items: AppString.puzzleLengthList
+                                .map(
+                                  (value) => DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(left: 10),
+                                      child: Text(value),
+                                    ),
                                   ),
-                                ),
-                              )
-                              .toList(),
-                          onChanged: (selectedLength) {
-                            if (puzzleLength == 0) {
-                              dropDownSelectedLength = selectedLength;
-                              puzzleLength =
-                                  int.parse(selectedLength!.substring(0, 1));
-                              fillSlideObject();
-                              setState(() {});
-                            }
-                          },
+                                )
+                                .toList(),
+                            onChanged: (selectedLength) {
+                              if (puzzleLength == 0) {
+                                dropDownSelectedLength = selectedLength;
+                                puzzleLength =
+                                    int.parse(selectedLength!.substring(0, 1));
+                                fillSlideObject();
+                                setState(() {
+                                  isVisible = !isVisible;
+                                });
+                              }
+                            },
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
+              if (rectangleAdLoaded)
+                Container(
+                  width: rectangleAd.size.width.toDouble(),
+                  height: rectangleAd.size.height.toDouble(),
+                  alignment: Alignment.bottomCenter,
+                  child: AdWidget(ad: rectangleAd),
+                ),
             ],
           ),
         ),
