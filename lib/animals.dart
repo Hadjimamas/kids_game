@@ -1,6 +1,7 @@
-
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:kids_game/ad_helper.dart';
 
 class AnimalsPage extends StatefulWidget {
   final List<dynamic> animalList;
@@ -15,9 +16,31 @@ enum TtsState { playing, stopped, paused, continued }
 
 class AnimalsPageState extends State<AnimalsPage> {
   final audioPlayer = AudioPlayer();
+  InterstitialAd? _interstitialAd;
+  int counter = 0;
+
+  /// Loads an interstitial ad.
+  void loadInterstitialAd() {
+    InterstitialAd.load(
+        adUnitId: AdHelper.interstitialAdUnitId,
+        request: const AdRequest(),
+        adLoadCallback: InterstitialAdLoadCallback(
+          // Called when an ad is successfully received.
+          onAdLoaded: (ad) {
+            debugPrint('$ad loaded.');
+            // Keep a reference to the ad so you can show it later.
+            _interstitialAd = ad;
+          },
+          // Called when an ad request failed.
+          onAdFailedToLoad: (LoadAdError error) {
+            debugPrint('InterstitialAd failed to load: $error');
+          },
+        ));
+  }
 
   @override
   void initState() {
+    loadInterstitialAd();
     super.initState();
   }
 
@@ -83,15 +106,14 @@ class AnimalsPageState extends State<AnimalsPage> {
                         child: const Icon(Icons.volume_up),
                         onPressed: () {
                           print('Animal Playing: $animalName');
-                          audioPlayer.setAsset(
-                              "$defaultSoundPath$animalSound"
-                          );
+                          audioPlayer.setAsset("$defaultSoundPath$animalSound");
                           audioPlayer.play();
-                          // audioPlayer.open(
-                          //   Audio("$defaultSoundPath$animalSound"),
-                          //   autoStart: true,
-                          //   showNotification: true,
-                          // );
+                          counter++;
+                          debugPrint(counter.toString());
+                          if (counter % 3 == 0) {
+                            _interstitialAd!.show();
+                            loadInterstitialAd();
+                          }
                         },
                       ),
                     ],

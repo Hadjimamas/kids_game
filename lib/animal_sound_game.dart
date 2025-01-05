@@ -1,4 +1,5 @@
 import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 
@@ -18,18 +19,9 @@ class FindAnimalSoundState extends State<FindAnimalSound> {
   }
 
   Future<void> playAnimalSound(String defaultSoundPath, String animalSound) {
-    //final audioPlayer = AssetsAudioPlayer();
     final audioPlayer = AudioPlayer();
-    audioPlayer.setAsset(
-        "$defaultSoundPath$animalSound"
-    );
-
+    audioPlayer.setAsset("$defaultSoundPath$animalSound");
     return audioPlayer.play();
-    // return audioPlayer.open(
-    //   Audio("$defaultSoundPath$animalSound"),
-    //   autoStart: true,
-    //   showNotification: true,
-    // );
   }
 
   Future<void> _showMyDialog(
@@ -48,7 +40,6 @@ class FindAnimalSoundState extends State<FindAnimalSound> {
             child: ListBody(
               children: <Widget>[
                 Text(bodyMsg),
-                //Text('Would you like to approve of this message?'),
               ],
             ),
           ),
@@ -59,13 +50,6 @@ class FindAnimalSoundState extends State<FindAnimalSound> {
                 Navigator.of(context).pop();
               },
             ),
-            // if (isCorrect)
-            //   TextButton(
-            //     child: const Text('Next'),
-            //     onPressed: () {
-            //       Navigator.of(context).pop();
-            //     },
-            //   ),
           ],
         );
       },

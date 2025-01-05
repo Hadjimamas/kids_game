@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:just_audio/just_audio.dart';
@@ -43,12 +44,6 @@ class AlphabetPuzzleState extends State<AlphabetPuzzle>
       vsync: this,
       duration: const Duration(milliseconds: 500),
     );
-    // _animation = Tween<double>(begin: 0, end: 1).animate(
-    //   CurvedAnimation(
-    //     parent: _animationController,
-    //     curve: Curves.easeInOut,
-    //   ),
-    // );
     super.initState();
   }
 
@@ -164,9 +159,7 @@ class AlphabetPuzzleState extends State<AlphabetPuzzle>
   Future<void> playAnimalSound(String defaultSoundPath, String animalSound) {
     //final audioPlayer = AssetsAudioPlayer();
     final audioPlayer = AudioPlayer();
-    audioPlayer.setAsset(
-        "$defaultSoundPath$animalSound"
-    );
+    audioPlayer.setAsset("$defaultSoundPath$animalSound");
 
     return audioPlayer.play();
     // return audioPlayer.open(
