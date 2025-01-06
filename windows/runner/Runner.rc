@@ -92,7 +92,7 @@ BEGIN
             VALUE "CompanyName", "com.game.kids" "\0"
             VALUE "FileDescription", "kids_game" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "kids_game" "\0"
+            VALUE "InternalName", "com.club.kids" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2023 com.game.kids. All rights reserved." "\0"
             VALUE "OriginalFilename", "kids_game.exe" "\0"
             VALUE "ProductName", "kids_game" "\0"

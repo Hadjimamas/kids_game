@@ -5,10 +5,10 @@
 // 'flutter create' template.
 
 // The application's name. By default this is also the title of the Flutter window.
-PRODUCT_NAME = kids_game
+PRODUCT_NAME = Kids Club
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = com.game.kids.kidsGame
+PRODUCT_BUNDLE_IDENTIFIER = com.club.kids
 
 // The copyright displayed in application information
 PRODUCT_COPYRIGHT = Copyright © 2023 com.game.kids. All rights reserved.

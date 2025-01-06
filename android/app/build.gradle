@@ -24,7 +24,7 @@ if (flutterVersionName == null) {
 
 android {
     namespace "com.game.kids.kids_game"
-    compileSdkVersion 34
+    compileSdkVersion 35
     ndkVersion = "27.0.12077973"
 
     compileOptions {
@@ -33,9 +33,9 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.game.kids.kids_game"
+        applicationId "com.club.kids"
         minSdkVersion 24
-        targetSdkVersion 34
+        targetSdkVersion 35
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }

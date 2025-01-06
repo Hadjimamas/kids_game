@@ -2,7 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:kids_game/ad_helper.dart';
 
 class AlphabetPuzzle extends StatefulWidget {
   const AlphabetPuzzle({Key? key}) : super(key: key);
@@ -13,6 +15,9 @@ class AlphabetPuzzle extends StatefulWidget {
 
 class AlphabetPuzzleState extends State<AlphabetPuzzle>
     with SingleTickerProviderStateMixin {
+  InterstitialAd? _interstitialAd;
+  int adCounter = 0;
+
   /// List of Json file
   List<dynamic> animalList = [];
 
@@ -38,6 +43,7 @@ class AlphabetPuzzleState extends State<AlphabetPuzzle>
 
   @override
   void initState() {
+    loadInterstitialAd();
     readJson();
     generateAlphabetOptions();
     _animationController = AnimationController(
@@ -51,6 +57,34 @@ class AlphabetPuzzleState extends State<AlphabetPuzzle>
   void dispose() {
     _animationController.dispose();
     super.dispose();
+  }
+
+  /// Loads an interstitial ad.
+  void loadInterstitialAd() {
+    InterstitialAd.load(
+        adUnitId: AdHelper.interstitialAdUnitId,
+        request: const AdRequest(),
+        adLoadCallback: InterstitialAdLoadCallback(
+          // Called when an ad is successfully received.
+          onAdLoaded: (ad) {
+            debugPrint('$ad loaded.');
+            // Keep a reference to the ad so you can show it later.
+            _interstitialAd = ad;
+          },
+          // Called when an ad request failed.
+          onAdFailedToLoad: (LoadAdError error) {
+            debugPrint('InterstitialAd failed to load: $error');
+          },
+        ));
+  }
+
+  void showInterstitialAd() {
+    adCounter++;
+    debugPrint(adCounter.toString());
+    if (adCounter % 5 == 0) {
+      _interstitialAd!.show();
+      loadInterstitialAd();
+    }
   }
 
   ///Reads Json File
@@ -157,16 +191,10 @@ class AlphabetPuzzleState extends State<AlphabetPuzzle>
   }
 
   Future<void> playAnimalSound(String defaultSoundPath, String animalSound) {
-    //final audioPlayer = AssetsAudioPlayer();
     final audioPlayer = AudioPlayer();
     audioPlayer.setAsset("$defaultSoundPath$animalSound");
 
     return audioPlayer.play();
-    // return audioPlayer.open(
-    //   Audio("$defaultSoundPath$animalSound"),
-    //   autoStart: true,
-    //   showNotification: true,
-    // );
   }
 
   @override
@@ -188,15 +216,6 @@ class AlphabetPuzzleState extends State<AlphabetPuzzle>
         child: SingleChildScrollView(
           child: Column(
             children: [
-              // Text(
-              //   listQuestions[currentPuzzle],
-              //   style: TextStyle(
-              //     color: Colors.deepPurple,
-              //     fontSize: deviceWidth / 9,
-              //     fontFamily: 'Lovely Kids',
-              //     fontWeight: FontWeight.bold,
-              //   ),
-              // ),
               Image.asset(
                 imageUrls[currentPuzzle],
                 width: deviceWidth,
@@ -252,7 +271,6 @@ class AlphabetPuzzleState extends State<AlphabetPuzzle>
                       },
                     ),
                   ),
-                  //const SizedBox(height: 15),
                   SizedBox(
                     width: deviceWidth,
                     height: deviceHeight / 5,
@@ -350,6 +368,7 @@ class AlphabetPuzzleState extends State<AlphabetPuzzle>
                           currentPuzzle--;
                           generateAlphabetOptions();
                         }
+                        showInterstitialAd();
                       });
                     },
                   ),
@@ -394,6 +413,7 @@ class AlphabetPuzzleState extends State<AlphabetPuzzle>
                           currentPuzzle++;
                           generateAlphabetOptions();
                         }
+                        showInterstitialAd();
                       });
                     },
                   ),
