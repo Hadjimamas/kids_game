@@ -8,7 +8,6 @@ import 'package:kids_game/imagePuzzle/Core/app_string.dart';
 import 'package:kids_game/imagePuzzle/Model/utility.dart';
 import 'package:kids_game/imagePuzzle/Presentation/FlutterPuzzle/puzzle_page.dart';
 import 'package:kids_game/imagePuzzle/Services/hive_db.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 import '../../../../main.dart';
 
@@ -116,8 +115,7 @@ class MyPuzzleSectionState extends State<MyPuzzleSection> {
   }
 
   pickImageFromGallery() async {
-    var permission = Permission.storage.request();
-    if (!kIsWeb && await permission.isGranted) {
+    if (!kIsWeb) {
       imagePicker
           .pickImage(source: ImageSource.gallery)
           .then((imageFile) async {
