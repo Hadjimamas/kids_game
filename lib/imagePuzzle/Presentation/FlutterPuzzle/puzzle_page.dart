@@ -43,9 +43,10 @@ class _PuzzlePageState extends State<PuzzlePage> {
   String? dropDownSelectedLength;
   late double _width;
   late RewardedAd _rewardedAd;
+  bool rewardAdLoaded = false;
   late BannerAd rectangleAd;
   bool rectangleAdLoaded = false;
-  bool isVisible = true;
+  bool levelSelected = false;
 
   void loadRectangleAd() {
     rectangleAd = BannerAd(
@@ -75,6 +76,7 @@ class _PuzzlePageState extends State<PuzzlePage> {
           debugPrint('Reward Ad Loaded');
           // Keep a reference to the ad so you can show it later.
           _rewardedAd = ad;
+          rewardAdLoaded = true;
         },
         // Called when an ad request failed.
         onAdFailedToLoad: (LoadAdError error) {
@@ -225,20 +227,27 @@ class _PuzzlePageState extends State<PuzzlePage> {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 0),
-            child: IconButton(
-              tooltip: "Hint",
-              onPressed: () {
-                setState(() {
-                  _rewardedAd.show(onUserEarnedReward:
-                      (AdWithoutView ad, RewardItem rewardItem) {
-                    // Reward the user for watching an ad.
-                    showText = !showText;
+            child: Visibility(
+              visible: levelSelected,
+              child: IconButton(
+                tooltip: "Hint",
+                onPressed: () {
+                  setState(() {
+                    if (rewardAdLoaded) {
+                      _rewardedAd.show(onUserEarnedReward:
+                          (AdWithoutView ad, RewardItem rewardItem) {
+                        // Reward the user for watching an ad.
+                        showText = !showText;
+                      });
+                    } else {
+                      showText = !showText;
+                    }
                   });
-                });
-              },
-              icon: Icon(
-                showText ? Icons.lightbulb_sharp : Icons.lightbulb_outlined,
-                color: showText ? Colors.orange : AppColors.greyColor,
+                },
+                icon: Icon(
+                  showText ? Icons.lightbulb_sharp : Icons.lightbulb_outlined,
+                  color: showText ? Colors.orange : AppColors.greyColor,
+                ),
               ),
             ),
           ),
@@ -354,7 +363,7 @@ class _PuzzlePageState extends State<PuzzlePage> {
               ),
               const SizedBox(height: 20),
               Offstage(
-                offstage: !isVisible,
+                offstage: levelSelected,
                 child: SizedBox(
                   height: 50,
                   child: Row(
@@ -370,7 +379,7 @@ class _PuzzlePageState extends State<PuzzlePage> {
                             fillSlideObject();
                           }
                           setState(() {
-                            isVisible = !isVisible;
+                            levelSelected = !levelSelected;
                           });
                         },
                         backgroundColor: puzzleLength == 2
@@ -385,7 +394,7 @@ class _PuzzlePageState extends State<PuzzlePage> {
                             fillSlideObject();
                           }
                           setState(() {
-                            isVisible = !isVisible;
+                            levelSelected = !levelSelected;
                           });
                         },
                         backgroundColor: puzzleLength == 3
@@ -400,7 +409,7 @@ class _PuzzlePageState extends State<PuzzlePage> {
                             fillSlideObject();
                           }
                           setState(() {
-                            isVisible = !isVisible;
+                            levelSelected = !levelSelected;
                           });
                         },
                         backgroundColor: puzzleLength == 4
@@ -443,7 +452,7 @@ class _PuzzlePageState extends State<PuzzlePage> {
                                     int.parse(selectedLength!.substring(0, 1));
                                 fillSlideObject();
                                 setState(() {
-                                  isVisible = !isVisible;
+                                  levelSelected = !levelSelected;
                                 });
                               }
                             },
