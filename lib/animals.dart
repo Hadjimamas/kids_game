@@ -110,7 +110,7 @@ class AnimalsPageState extends State<AnimalsPage> {
                           audioPlayer.play();
                           counter++;
                           debugPrint(counter.toString());
-                          if (counter % 3 == 0) {
+                          if (counter % 5 == 0) {
                             _interstitialAd!.show();
                             loadInterstitialAd();
                           }
